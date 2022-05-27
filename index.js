@@ -48,10 +48,9 @@ app.use(function (req, res, next) {
 app.use('/api/', (req, res, next) => {
 
 
-    next()
-    // if (process.env.API_KEY == req.headers.apikey) next()
-    // else
-    //  res.sendStatus(400)
+    if (process.env.API_KEY == req.headers.apikey) next()
+    else
+        res.sendStatus(400)
 })
 
 
