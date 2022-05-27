@@ -1,0 +1,1247 @@
+[
+    {
+        "id": 1,
+        "ar": "أفغانستان",
+        "en": "Afghanistan"
+    },
+    {
+        "id": 2,
+        "ar": "ألبانيا",
+        "en": "Albania"
+    },
+    {
+        "id": 3,
+        "ar": "الجزائر",
+        "en": "Algeria"
+    },
+    {
+        "id": 4,
+        "ar": "ساموا الأمريكية",
+        "en": "American Samoa"
+    },
+    {
+        "id": 5,
+        "ar": "أندورا",
+        "en": "Andorra"
+    },
+    {
+        "id": 6,
+        "ar": "أنغولا",
+        "en": "Angola"
+    },
+    {
+        "id": 7,
+        "ar": "أنغويلا",
+        "en": "Anguilla"
+    },
+    {
+        "id": 8,
+        "ar": "القارة القطبية الجنوبية",
+        "en": "Antarctica"
+    },
+    {
+        "id": 9,
+        "ar": "أنتيغوا وباربودا",
+        "en": "Antigua and Barbuda"
+    },
+    {
+        "id": 10,
+        "ar": "الأرجنتين",
+        "en": "Argentina"
+    },
+    {
+        "id": 11,
+        "ar": "أرمينيا",
+        "en": "Armenia"
+    },
+    {
+        "id": 12,
+        "ar": "أروبا",
+        "en": "Aruba"
+    },
+    {
+        "id": 13,
+        "ar": "أستراليا",
+        "en": "Australia"
+    },
+    {
+        "id": 14,
+        "ar": "النمسا",
+        "en": "Austria"
+    },
+    {
+        "id": 15,
+        "ar": "أذربيجان",
+        "en": "Azerbaijan"
+    },
+    {
+        "id": 16,
+        "ar": "باهاماس",
+        "en": "Bahamas"
+    },
+    {
+        "id": 17,
+        "ar": "البحرين",
+        "en": "Bahrain"
+    },
+    {
+        "id": 18,
+        "ar": "بنغلاديش",
+        "en": "Bangladesh"
+    },
+    {
+        "id": 19,
+        "ar": "باربادوس",
+        "en": "Barbados"
+    },
+    {
+        "id": 20,
+        "ar": "روسيا البيضاء",
+        "en": "Belarus"
+    },
+    {
+        "id": 21,
+        "ar": "بلجيكا",
+        "en": "Belgium"
+    },
+    {
+        "id": 22,
+        "ar": "بليز",
+        "en": "Belize"
+    },
+    {
+        "id": 23,
+        "ar": "بنين",
+        "en": "Benin"
+    },
+    {
+        "id": 24,
+        "ar": "برمودا",
+        "en": "Bermuda"
+    },
+    {
+        "id": 25,
+        "ar": "بوتان",
+        "en": "Bhutan"
+    },
+    {
+        "id": 26,
+        "ar": "بوليفيا",
+        "en": "Bolivia"
+    },
+    {
+        "id": 27,
+        "ar": "البوسنة والهرسك",
+        "en": "Bosnia and Herzegovina"
+    },
+    {
+        "id": 28,
+        "ar": "بوتسوانا",
+        "en": "Botswana"
+    },
+    {
+        "id": 29,
+        "ar": "جزيرة بوفيه",
+        "en": "Bouvet Island"
+    },
+    {
+        "id": 30,
+        "ar": "البرازيل",
+        "en": "Brazil"
+    },
+    {
+        "id": 31,
+        "ar": "إقليم المحيط الهندي البريطاني",
+        "en": "British Indian Ocean Territory"
+    },
+    {
+        "id": 32,
+        "ar": "بروناي",
+        "en": "Brunei Darussalam"
+    },
+    {
+        "id": 33,
+        "ar": "بلغاريا",
+        "en": "Bulgaria"
+    },
+    {
+        "id": 34,
+        "ar": "وركينا فاسو",
+        "en": "Burkina Faso"
+    },
+    {
+        "id": 35,
+        "ar": "بوروندي",
+        "en": "Burundi"
+    },
+    {
+        "id": 36,
+        "ar": "كمبوديا",
+        "en": "Cambodia"
+    },
+    {
+        "id": 37,
+        "ar": "الكاميرون",
+        "en": "Cameroon"
+    },
+    {
+        "id": 38,
+        "ar": "كندا",
+        "en": "Canada"
+    },
+    {
+        "id": 39,
+        "ar": "الرأس الأخضر",
+        "en": "Cape Verde"
+    },
+    {
+        "id": 40,
+        "ar": "جزر كايمان",
+        "en": "Cayman Islands"
+    },
+    {
+        "id": 41,
+        "ar": "جمهورية أفريقيا الوسطى",
+        "en": "Central African Republic"
+    },
+    {
+        "id": 42,
+        "ar": "تشاد",
+        "en": "Chad"
+    },
+    {
+        "id": 43,
+        "ar": "تشيلي",
+        "en": "Chile"
+    },
+    {
+        "id": 44,
+        "ar": "الصين",
+        "en": "China"
+    },
+    {
+        "id": 45,
+        "ar": "جزيرة عيد الميلاد",
+        "en": "Christmas Island"
+    },
+    {
+        "id": 46,
+        "ar": "جزر كوكوس",
+        "en": "Cocos (Keeling) Islands"
+    },
+    {
+        "id": 47,
+        "ar": "كولومبيا",
+        "en": "Colombia"
+    },
+    {
+        "id": 48,
+        "ar": "زر القمر",
+        "en": "Comoros"
+    },
+    {
+        "id": 49,
+        "ar": "جمهورية الكونغو",
+        "en": "Congo"
+    },
+    {
+        "id": 50,
+        "ar": "جمهورية الكونغو الديمقراطية",
+        "en": "Congo, the Democratic Republic of the"
+    },
+    {
+        "id": 51,
+        "ar": "جزر كوك",
+        "en": "Cook Islands"
+    },
+    {
+        "id": 52,
+        "ar": "كوستاريكا",
+        "en": "Costa Rica"
+    },
+    {
+        "id": 53,
+        "ar": "ساحل العاج",
+        "en": "Cote D'Ivoire"
+    },
+    {
+        "id": 54,
+        "ar": "كرواتيا",
+        "en": "Croatia"
+    },
+    {
+        "id": 55,
+        "ar": "كوبا",
+        "en": "Cuba"
+    },
+    {
+        "id": 56,
+        "ar": "قبرص",
+        "en": "Cyprus"
+    },
+    {
+        "id": 57,
+        "ar": "جمهورية التشيك",
+        "en": "Czech Republic"
+    },
+    {
+        "id": 58,
+        "ar": "الدنمارك",
+        "en": "Denmark"
+    },
+    {
+        "id": 59,
+        "ar": "جيبوتي",
+        "en": "Djibouti"
+    },
+    {
+        "id": 60,
+        "ar": "دومينيكا",
+        "en": "Dominica"
+    },
+    {
+        "id": 61,
+        "ar": "جمهورية الدومينيكان",
+        "en": "Dominican Republic"
+    },
+    {
+        "id": 62,
+        "ar": "الإكوادور",
+        "en": "Ecuador"
+    },
+    {
+        "id": 63,
+        "ar": "مصر",
+        "en": "Egypt"
+    },
+    {
+        "id": 64,
+        "ar": "السلفادور",
+        "en": "El Salvador"
+    },
+    {
+        "id": 65,
+        "ar": "غينيا الاستوائية",
+        "en": "Equatorial Guinea"
+    },
+    {
+        "id": 66,
+        "ar": "إريتريا",
+        "en": "Eritrea"
+    },
+    {
+        "id": 67,
+        "ar": "إستونيا",
+        "en": "Estonia"
+    },
+    {
+        "id": 68,
+        "ar": "إثيوبيا",
+        "en": "Ethiopia"
+    },
+    {
+        "id": 69,
+        "ar": "جزر فوكلاند",
+        "en": "Falkland Islands (Malvinas)"
+    },
+    {
+        "id": 70,
+        "ar": "جزر فارو",
+        "en": "Faroe Islands"
+    },
+    {
+        "id": 71,
+        "ar": "فيجي",
+        "en": "Fiji"
+    },
+    {
+        "id": 72,
+        "ar": "فنلندا",
+        "en": "Finland"
+    },
+    {
+        "id": 73,
+        "ar": "فرنسا",
+        "en": "France"
+    },
+    {
+        "id": 74,
+        "ar": "غويانا الفرنسية",
+        "en": "French Guiana"
+    },
+    {
+        "id": 75,
+        "ar": "بولينزيا الفرنسية",
+        "en": "French Polynesia"
+    },
+    {
+        "id": 76,
+        "ar": "أراض فرنسية جنوبية وأنتارتيكية",
+        "en": "French Southern Territories"
+    },
+    {
+        "id": 77,
+        "ar": "الغابون",
+        "en": "Gabon"
+    },
+    {
+        "id": 78,
+        "ar": "غامبيا",
+        "en": "Gambia"
+    },
+    {
+        "id": 79,
+        "ar": "جورجيا",
+        "en": "Georgia"
+    },
+    {
+        "id": 80,
+        "ar": "ألمانيا",
+        "en": "Germany"
+    },
+    {
+        "id": 81,
+        "ar": "غانا",
+        "en": "Ghana"
+    },
+    {
+        "id": 82,
+        "ar": "جبل طارق",
+        "en": "Gibraltar"
+    },
+    {
+        "id": 83,
+        "ar": "اليونان",
+        "en": "Greece"
+    },
+    {
+        "id": 84,
+        "ar": "جرينلاند",
+        "en": "Greenland"
+    },
+    {
+        "id": 85,
+        "ar": "غرينادا",
+        "en": "Grenada"
+    },
+    {
+        "id": 86,
+        "ar": "غوادلوب",
+        "en": "Guadeloupe"
+    },
+    {
+        "id": 87,
+        "ar": "غوام",
+        "en": "Guam"
+    },
+    {
+        "id": 88,
+        "ar": "غواتيمالا",
+        "en": "Guatemala"
+    },
+    {
+        "id": 89,
+        "ar": "غينيا",
+        "en": "Guinea"
+    },
+    {
+        "id": 90,
+        "ar": "غينيا بيساو",
+        "en": "Guinea-Bissau"
+    },
+    {
+        "id": 91,
+        "ar": "غيانا",
+        "en": "Guyana"
+    },
+    {
+        "id": 92,
+        "ar": "هايتي",
+        "en": "Haiti"
+    },
+    {
+        "id": 93,
+        "ar": "جزيرة هيرد وجزر ماكدونالد",
+        "en": "Heard Island and McDonald Islands"
+    },
+    {
+        "id": 94,
+        "ar": "الفاتيكان",
+        "en": "Holy See (Vatican City State)"
+    },
+    {
+        "id": 95,
+        "ar": "هندوراس",
+        "en": "Honduras"
+    },
+    {
+        "id": 96,
+        "ar": "هونغ كونغ",
+        "en": "Hong Kong"
+    },
+    {
+        "id": 97,
+        "ar": "المجر",
+        "en": "Hungary"
+    },
+    {
+        "id": 98,
+        "ar": "آيسلندا",
+        "en": "Iceland"
+    },
+    {
+        "id": 99,
+        "ar": "الهند",
+        "en": "India"
+    },
+    {
+        "id": 100,
+        "ar": "إندونيسيا",
+        "en": "Indonesia"
+    },
+    {
+        "id": 101,
+        "ar": "إيران",
+        "en": "Iran, Islamic Republic of"
+    },
+    {
+        "id": 102,
+        "ar": "العراق",
+        "en": "Iraq"
+    },
+    {
+        "id": 103,
+        "ar": "أيرلندا",
+        "en": "Ireland"
+    },
+    {
+        "id": 104,
+        "ar": "إسرائيل",
+        "en": "Israel"
+    },
+    {
+        "id": 105,
+        "ar": "إيطاليا",
+        "en": "Italy"
+    },
+    {
+        "id": 106,
+        "ar": "جامايكا",
+        "en": "Jamaica"
+    },
+    {
+        "id": 107,
+        "ar": "اليابان",
+        "en": "Japan"
+    },
+    {
+        "id": 108,
+        "ar": "الأردن",
+        "en": "Jordan"
+    },
+    {
+        "id": 109,
+        "ar": "كازاخستان",
+        "en": "Kazakhstan"
+    },
+    {
+        "id": 110,
+        "ar": "كينيا",
+        "en": "Kenya"
+    },
+    {
+        "id": 111,
+        "ar": "كيريباتي",
+        "en": "Kiribati"
+    },
+    {
+        "id": 112,
+        "ar": "كوريا الشمالية",
+        "en": "North Korea"
+    },
+    {
+        "id": 113,
+        "ar": "كوريا الجنوبية",
+        "en": "South Korea"
+    },
+    {
+        "id": 114,
+        "ar": "الكويت",
+        "en": "Kuwait"
+    },
+    {
+        "id": 115,
+        "ar": "قيرغيزستان",
+        "en": "Kyrgyzstan"
+    },
+    {
+        "id": 116,
+        "ar": "لاوس",
+        "en": "Lao People's Democratic Republic"
+    },
+    {
+        "id": 117,
+        "ar": "لاتفيا",
+        "en": "Latvia"
+    },
+    {
+        "id": 118,
+        "ar": "لبنان",
+        "en": "Lebanon"
+    },
+    {
+        "id": 119,
+        "ar": "ليسوتو",
+        "en": "Lesotho"
+    },
+    {
+        "id": 120,
+        "ar": "ليبيريا",
+        "en": "Liberia"
+    },
+    {
+        "id": 121,
+        "ar": "ليبيا",
+        "en": "Libya"
+    },
+    {
+        "id": 122,
+        "ar": "ليختنشتاين",
+        "en": "Liechtenstein"
+    },
+    {
+        "id": 123,
+        "ar": "ليتوانيا",
+        "en": "Lithuania"
+    },
+    {
+        "id": 124,
+        "ar": "لوكسمبورغ",
+        "en": "Luxembourg"
+    },
+    {
+        "id": 125,
+        "ar": "ماكاو",
+        "en": "Macao"
+    },
+    {
+        "id": 126,
+        "ar": "مدغشقر",
+        "en": "Madagascar"
+    },
+    {
+        "id": 127,
+        "ar": "مالاوي",
+        "en": "Malawi"
+    },
+    {
+        "id": 128,
+        "ar": "ماليزيا",
+        "en": "Malaysia"
+    },
+    {
+        "id": 129,
+        "ar": "جزر المالديف",
+        "en": "Maldives"
+    },
+    {
+        "id": 130,
+        "ar": "مالي",
+        "en": "Mali"
+    },
+    {
+        "id": 131,
+        "ar": "مالطا",
+        "en": "Malta"
+    },
+    {
+        "id": 132,
+        "ar": "جزر مارشال",
+        "en": "Marshall Islands"
+    },
+    {
+        "id": 133,
+        "ar": "مارتينيك",
+        "en": "Martinique"
+    },
+    {
+        "id": 134,
+        "ar": "موريتانيا",
+        "en": "Mauritania"
+    },
+    {
+        "id": 135,
+        "ar": "موريشيوس",
+        "en": "Mauritius"
+    },
+    {
+        "id": 136,
+        "ar": "مايوت",
+        "en": "Mayotte"
+    },
+    {
+        "id": 137,
+        "ar": "المكسيك",
+        "en": "Mexico"
+    },
+    {
+        "id": 138,
+        "ar": "ولايات ميكرونيسيا المتحدة",
+        "en": "Micronesia, Federated States of"
+    },
+    {
+        "id": 139,
+        "ar": "مولدوفا",
+        "en": "Moldova, Republic of"
+    },
+    {
+        "id": 140,
+        "ar": "موناكو",
+        "en": "Monaco"
+    },
+    {
+        "id": 141,
+        "ar": "منغوليا",
+        "en": "Mongolia"
+    },
+    {
+        "id": 142,
+        "ar": "مونتسرات",
+        "en": "Montserrat"
+    },
+    {
+        "id": 143,
+        "ar": "المغرب",
+        "en": "Morocco"
+    },
+    {
+        "id": 144,
+        "ar": "موزمبيق",
+        "en": "Mozambique"
+    },
+    {
+        "id": 145,
+        "ar": "بورما",
+        "en": "Myanmar"
+    },
+    {
+        "id": 146,
+        "ar": "ناميبيا",
+        "en": "Namibia"
+    },
+    {
+        "id": 147,
+        "ar": "ناورو",
+        "en": "Nauru"
+    },
+    {
+        "id": 148,
+        "ar": "نيبال",
+        "en": "Nepal"
+    },
+    {
+        "id": 149,
+        "ar": "هولندا",
+        "en": "Netherlands"
+    },
+    {
+        "id": 150,
+        "ar": "كاليدونيا الجديدة",
+        "en": "New Caledonia"
+    },
+    {
+        "id": 151,
+        "ar": "نيوزيلندا",
+        "en": "New Zealand"
+    },
+    {
+        "id": 152,
+        "ar": "نيكاراغوا",
+        "en": "Nicaragua"
+    },
+    {
+        "id": 153,
+        "ar": "النيجر",
+        "en": "Niger"
+    },
+    {
+        "id": 154,
+        "ar": "نيجيريا",
+        "en": "Nigeria"
+    },
+    {
+        "id": 155,
+        "ar": "نييوي",
+        "en": "Niue"
+    },
+    {
+        "id": 156,
+        "ar": "جزيرة نورفولك",
+        "en": "Norfolk Island"
+    },
+    {
+        "id": 158,
+        "ar": "جزر مريانا الشمالية",
+        "en": "Northern Mariana Islands"
+    },
+    {
+        "id": 159,
+        "ar": "النرويج",
+        "en": "Norway"
+    },
+    {
+        "id": 160,
+        "ar": "عمان",
+        "en": "Oman"
+    },
+    {
+        "id": 161,
+        "ar": "باكستان",
+        "en": "Pakistan"
+    },
+    {
+        "id": 162,
+        "ar": "بالاو",
+        "en": "Palau"
+    },
+    {
+        "id": 163,
+        "ar": "فلسطين",
+        "en": "Palestine"
+    },
+    {
+        "id": 164,
+        "ar": "بنما",
+        "en": "Panama"
+    },
+    {
+        "id": 165,
+        "ar": "بابوا غينيا الجديدة",
+        "en": "Papua New Guinea"
+    },
+    {
+        "id": 166,
+        "ar": "باراغواي",
+        "en": "Paraguay"
+    },
+    {
+        "id": 167,
+        "ar": "بيرو",
+        "en": "Peru"
+    },
+    {
+        "id": 168,
+        "ar": "الفلبين",
+        "en": "Philippines"
+    },
+    {
+        "id": 169,
+        "ar": "جزر بيتكيرن",
+        "en": "Pitcairn"
+    },
+    {
+        "id": 170,
+        "ar": "بولندا",
+        "en": "Poland"
+    },
+    {
+        "id": 171,
+        "ar": "البرتغال",
+        "en": "Portugal"
+    },
+    {
+        "id": 172,
+        "ar": "بورتوريكو",
+        "en": "Puerto Rico"
+    },
+    {
+        "id": 173,
+        "ar": "قطر",
+        "en": "Qatar"
+    },
+    {
+        "id": 174,
+        "ar": "لا ريونيون",
+        "en": "Reunion"
+    },
+    {
+        "id": 175,
+        "ar": "رومانيا",
+        "en": "Romania"
+    },
+    {
+        "id": 177,
+        "ar": "روسيا",
+        "en": "Russia"
+    },
+    {
+        "id": 178,
+        "ar": "رواندا",
+        "en": "Rwanda"
+    },
+    {
+        "id": 179,
+        "ar": "سانت هيلينا وأسينشين وتريستان دا كونا",
+        "en": "Saint Helena"
+    },
+    {
+        "id": 180,
+        "ar": "سانت كيتس ونيفيس",
+        "en": "Saint Kitts and Nevis"
+    },
+    {
+        "id": 181,
+        "ar": "سانت لوسيا",
+        "en": "Saint Lucia"
+    },
+    {
+        "id": 182,
+        "ar": "سان بيير وميكلون",
+        "en": "Saint Pierre and Miquelon"
+    },
+    {
+        "id": 183,
+        "ar": "سانت فينسنت والغرينادين",
+        "en": "Saint Vincent and the Grenadines"
+    },
+    {
+        "id": 184,
+        "ar": "ساموا",
+        "en": "Samoa"
+    },
+    {
+        "id": 185,
+        "ar": "سان مارينو",
+        "en": "San Marino"
+    },
+    {
+        "id": 186,
+        "ar": "ساو تومي وبرينسيب",
+        "en": "Sao Tome and Principe"
+    },
+    {
+        "id": 187,
+        "ar": "السعودية",
+        "en": "Saudi Arabia"
+    },
+    {
+        "id": 188,
+        "ar": "السنغال",
+        "en": "Senegal"
+    },
+    {
+        "id": 189,
+        "ar": "سيشل",
+        "en": "Seychelles"
+    },
+    {
+        "id": 190,
+        "ar": "سيراليون",
+        "en": "Sierra Leone"
+    },
+    {
+        "id": 191,
+        "ar": "سنغافورة",
+        "en": "Singapore"
+    },
+    {
+        "id": 192,
+        "ar": "سلوفاكيا",
+        "en": "Slovakia"
+    },
+    {
+        "id": 193,
+        "ar": "سلوفينيا",
+        "en": "Slovenia"
+    },
+    {
+        "id": 194,
+        "ar": "جزر سليمان",
+        "en": "Solomon Islands"
+    },
+    {
+        "id": 195,
+        "ar": "الصومال",
+        "en": "Somalia"
+    },
+    {
+        "id": 196,
+        "ar": "جنوب أفريقيا",
+        "en": "South Africa"
+    },
+    {
+        "id": 197,
+        "ar": "جورجيا الجنوبية وجزر ساندويتش الجنوبية",
+        "en": "South Georgia and the South Sandwich Islands"
+    },
+    {
+        "id": 198,
+        "ar": "إسبانيا",
+        "en": "Spain"
+    },
+    {
+        "id": 199,
+        "ar": "سريلانكا",
+        "en": "Sri Lanka"
+    },
+    {
+        "id": 201,
+        "ar": "السودان",
+        "en": "Sudan"
+    },
+    {
+        "id": 202,
+        "ar": "سورينام",
+        "en": "Suriname"
+    },
+    {
+        "id": 203,
+        "ar": "سفالبارد ويان ماين",
+        "en": "Svalbard and Jan Mayen"
+    },
+    {
+        "id": 204,
+        "ar": "سوازيلاند",
+        "en": "Eswatini"
+    },
+    {
+        "id": 205,
+        "ar": "السويد",
+        "en": "Sweden"
+    },
+    {
+        "id": 206,
+        "ar": "سويسرا",
+        "en": "Switzerland"
+    },
+    {
+        "id": 207,
+        "ar": "سوريا",
+        "en": "Syrian Arab Republic"
+    },
+    {
+        "id": 208,
+        "ar": "تايوان",
+        "en": "Taiwan"
+    },
+    {
+        "id": 209,
+        "ar": "طاجيكستان",
+        "en": "Tajikistan"
+    },
+    {
+        "id": 210,
+        "ar": "تانزانيا",
+        "en": "Tanzania, United Republic of"
+    },
+    {
+        "id": 211,
+        "ar": "تايلاند",
+        "en": "Thailand"
+    },
+    {
+        "id": 212,
+        "ar": "تيمور الشرقية",
+        "en": "Timor-Leste"
+    },
+    {
+        "id": 213,
+        "ar": "توغو",
+        "en": "Togo"
+    },
+    {
+        "id": 214,
+        "ar": "توكيلاو",
+        "en": "Tokelau"
+    },
+    {
+        "id": 215,
+        "ar": "تونغا",
+        "en": "Tonga"
+    },
+    {
+        "id": 216,
+        "ar": "ترينيداد وتوباغو",
+        "en": "Trinidad and Tobago"
+    },
+    {
+        "id": 217,
+        "ar": "تونس",
+        "en": "Tunisia"
+    },
+    {
+        "id": 218,
+        "ar": "تركيا",
+        "en": "Turkey"
+    },
+    {
+        "id": 219,
+        "ar": "تركمانستان",
+        "en": "Turkmenistan"
+    },
+    {
+        "id": 220,
+        "ar": "جزر توركس وكايكوس",
+        "en": "Turks and Caicos Islands"
+    },
+    {
+        "id": 221,
+        "ar": "توفالو",
+        "en": "Tuvalu"
+    },
+    {
+        "id": 222,
+        "ar": "أوغندا",
+        "en": "Uganda"
+    },
+    {
+        "id": 223,
+        "ar": "أوكرانيا",
+        "en": "Ukraine"
+    },
+    {
+        "id": 224,
+        "ar": "لإمارات العربية المتحدة",
+        "en": "United Arab Emirates"
+    },
+    {
+        "id": 225,
+        "ar": "المملكة المتحدة",
+        "en": "United Kingdom"
+    },
+    {
+        "id": 226,
+        "ar": "الولايات المتحدة",
+        "en": "United States of America"
+    },
+    {
+        "id": 227,
+        "ar": "جزر الولايات المتحدة",
+        "en": "United States Minor Outlying Islands"
+    },
+    {
+        "id": 228,
+        "ar": "الأوروغواي",
+        "en": "Uruguay"
+    },
+    {
+        "id": 229,
+        "ar": "أوزبكستان",
+        "en": "Uzbekistan"
+    },
+    {
+        "id": 230,
+        "ar": "فانواتو",
+        "en": "Vanuatu"
+    },
+    {
+        "id": 231,
+        "ar": "فنزويلا",
+        "en": "Venezuela"
+    },
+    {
+        "id": 232,
+        "ar": "فيتنام",
+        "en": "Vietnam"
+    },
+    {
+        "id": 233,
+        "ar": "جزر العذراء البريطانية",
+        "en": "Virgin Islands, British"
+    },
+    {
+        "id": 234,
+        "ar": "جزر العذراء الأمريكية",
+        "en": "Virgin Islands, U.S."
+    },
+    {
+        "id": 235,
+        "ar": "والس وفوتونا",
+        "en": "Wallis and Futuna"
+    },
+    {
+        "id": 236,
+        "ar": "الصحراء الغربية",
+        "en": "Western Sahara"
+    },
+    {
+        "id": 237,
+        "ar": "اليمن",
+        "en": "Yemen"
+    },
+    {
+        "id": 238,
+        "ar": "زامبيا",
+        "en": "Zambia"
+    },
+    {
+        "id": 239,
+        "ar": "زيمبابوي",
+        "en": "Zimbabwe"
+    },
+    {
+        "id": 240,
+        "ar": "جزر أولاند",
+        "en": "Åland Islands"
+    },
+    {
+        "id": 241,
+        "ar": "الجزر الكاريبية الهولندية",
+        "en": "Bonaire, Sint Eustatius and Saba"
+    },
+    {
+        "id": 242,
+        "ar": "كوراساو",
+        "en": "Curaçao"
+    },
+    {
+        "id": 243,
+        "ar": "غيرنزي",
+        "en": "Guernsey"
+    },
+    {
+        "id": 244,
+        "ar": "جزيرة مان",
+        "en": "Isle of Man"
+    },
+    {
+        "id": 245,
+        "ar": "جيرزي",
+        "en": "Jersey"
+    },
+    {
+        "id": 246,
+        "ar": "الجبل الأسود",
+        "en": "Montenegro"
+    },
+    {
+        "id": 247,
+        "ar": "سان بارتيلمي",
+        "en": "Saint Barthélemy"
+    },
+    {
+        "id": 248,
+        "ar": "سانت مارتن (الجزء الفرنسي)",
+        "en": "Saint Martin (French part)"
+    },
+    {
+        "id": 249,
+        "ar": "صربيا",
+        "en": "Serbia"
+    },
+    {
+        "id": 250,
+        "ar": "سانت مارتن (الجزء الهولندي)",
+        "en": "Sint Maarten (Dutch part)"
+    },
+    {
+        "id": 251,
+        "ar": "جنوب السودان",
+        "en": "South Sudan"
+    },
+    {
+        "id": 252,
+        "ar": "كوسوفو",
+        "en": "Kosovo"
+    }
+]
