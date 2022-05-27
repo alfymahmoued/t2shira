@@ -105,10 +105,9 @@ router.post('/callback', async (req, res) => {
         }
         res.send()
     } catch (e) {
-        console.log(e)
         res.json({
             'stauts': false,
-            'data': e,
+            'data': 'Erro',
         })
     }
 })
@@ -137,10 +136,10 @@ router.get('/callback', async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
+
         res.json({
             'stauts': false,
-            'data': e,
+            'data': 'Erro',
         })
     }
 })
