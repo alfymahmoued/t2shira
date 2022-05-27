@@ -18,13 +18,13 @@ router.post('/register', async (req, res) => {
 
                 const userObject = new user_model({
                     provider: 'email',
-                    first_name: req.body.first_name ?? '',
-                    last_name: req.body.last_name ?? '',
-                    date_of_birth: req.body.date_of_birth ?? '',
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    date_of_birth: req.body.date_of_birth,
                     email: email,
-                    notification: notification ?? false,
+                    notification: notification,
                     uid: firebaseUser.uid,
-                    fcmToken: fcmToken ?? '',
+                    fcmToken: fcmToken,
                 })
 
                 const result = await userObject.save()
@@ -149,12 +149,12 @@ router.post('/social', async (req, res) => {
                 } else {
 
                     const userObject = new user_model({
-                        uid: firebaseUser.uid ?? '',
-                        first_name: firebaseUser.name ?? '',
+                        uid: firebaseUser.uid,
+                        first_name: firebaseUser.name,
                         last_name: '',
                         date_of_birth: '',
-                        email: firebaseUser.email ?? '',
-                        picture: firebaseUser.picture ?? '',
+                        email: firebaseUser.email,
+                        picture: firebaseUser.picture,
                         provider,
                         fcmToken,
                     })
