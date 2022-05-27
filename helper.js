@@ -1,8 +1,11 @@
 const firebaseAdmin = require('firebase-admin')
 const CryptoJS = require("crypto-js")
 const jwt = require("jsonwebtoken")
+const multer = require('multer');
+const path = require('path');
+const { v4: uuidv4, } = require('uuid');
 
-const serverURL = 'http://localhost:2222/'
+const serverURL = 'http://t2shira.com/'
 
 
 const encryptText = (text) => {
@@ -120,11 +123,30 @@ const sendNotificationToAll = async function (title, body) {
         return false
     }
 }
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public/');
+    },
+
+    filename: function (req, file, cb) {
+
+
+        const filePath = 'files/' + file.fieldname + '-' + uuidv4() + uuidv4() + path.extname(file.originalname)
+        cb(null, filePath);
+        if (!req.paths) req.paths = []
+        req.paths.push(serverURL + filePath)
+    }
+});
+
+const upload = multer({ storage: storage })
 module.exports = {
     encryptText, decryptText, createToken, verifyToken, sendNotification,
     verifyTokenAndAuthorization,
     verifyTokenAndAdmin,
     verifyTokenAndCompany,
     sendNotificationToAll,
+    upload,
     serverURL,
 }

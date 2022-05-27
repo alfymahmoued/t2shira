@@ -119,7 +119,7 @@ router.get('/callback', async (req, res) => {
 
         const { hmac, id } = req.query
 
-        if (req.query.success == 'false') {
+        if (!hmac || !id || req.query.success == 'false') {
             return res.json({
                 'stauts': false,
                 'data': req.query['data.message'],
