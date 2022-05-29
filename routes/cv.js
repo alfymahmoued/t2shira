@@ -148,6 +148,7 @@ router.get('/countries', async (req, res) => {
         })
 
     } catch (e) {
+        console.log(e)
         res.json({
             'status': false,
             'data': e
