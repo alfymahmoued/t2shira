@@ -137,9 +137,10 @@ router.get('/callback', async (req, res) => {
 
     } catch (e) {
 
+        console.log(e)
         res.json({
             'stauts': false,
-            'data': 'Erro',
+            'data': 'Error',
         })
     }
 })
