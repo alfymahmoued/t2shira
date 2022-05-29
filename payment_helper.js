@@ -60,7 +60,6 @@ async function paymentKeys(token, orderId, amount, billingData) {
 
 async function getHMACByOrderId(token, orderId) {
 
-    console.log('Order ID ' + orderId)
     const result = await axios
         .get(`https://accept.paymobsolutions.com/api/acceptance/transactions/${orderId}/hmac_calc`,
             {
