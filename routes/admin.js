@@ -625,6 +625,7 @@ router.post('/countries', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
+        console.log(e)
         res.json({
             'status': false,
             'data': e
