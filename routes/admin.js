@@ -792,6 +792,7 @@ router.get('/review-hajj-trips', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
+        console.log(e)
         res.json({
             'status': false,
             'data': e
