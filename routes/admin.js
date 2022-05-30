@@ -712,7 +712,7 @@ router.delete('/countries/:id', verifyTokenAndAdmin, async (req, res) => {
 
 ///////////////// TRIPS /////////////////////
 
-router.get('/review-trips', verifyTokenAndAdmin, async (req, res) => {
+router.get('/review-trips/:page', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -775,7 +775,7 @@ router.get('/unApprove-hajj-trip/:id', verifyTokenAndAdmin, async (req, res) => 
     }
 })
 
-router.get('/review-hajj-trips', verifyTokenAndAdmin, async (req, res) => {
+router.get('/review-hajj-trips/:page', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
