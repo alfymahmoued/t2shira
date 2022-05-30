@@ -263,6 +263,11 @@ router.post('/', verifyToken, async (req, res) => {
                 jobs: result._doc.jobs,
 
             },
+            childProcessOptions: {
+                env: {
+                    OPENSSL_CONF: '/dev/null',
+                },
+            },
             path: "./public/files/" + pdfPath,
             type: "",
         };
