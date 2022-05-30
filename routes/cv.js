@@ -243,7 +243,7 @@ router.post('/', verifyToken, async (req, res) => {
         var document = {
             html: html,
             data: {
-                logo_url: serverURL + 'files/logo.png',
+                logo_url: 'http://localhost:2222/files/logo.png',
                 name: result._doc.name,
                 picture: result._doc.picture,
                 phone: result._doc.phone,
