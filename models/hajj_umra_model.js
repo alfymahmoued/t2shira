@@ -47,7 +47,7 @@ const documentsSchema = new mongoose.Schema({
     required_documents_ar: { type: Array, required: true },
     required_documents_en: { type: Array, required: true },
 
-    accepted: { type: Boolean, default: true },
-    
+    accepted: { type: Boolean, default: false },
+
 }, { versionKey: false, timestamps: true, })
 module.exports = mongoose.model("hajj_umra", documentsSchema);

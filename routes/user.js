@@ -16,6 +16,8 @@ router.get('/profile', verifyToken, async (req, res) => {
 
         const result = await user_model.findById(req.user.id)
 
+        if (!result) res.status = 404
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
@@ -37,6 +39,8 @@ router.get('/profile/:id', verifyToken, async (req, res) => {
 
         const result = await user_model.findById(req.params.id)
 
+        if (!result) res.status = 404
+        
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'

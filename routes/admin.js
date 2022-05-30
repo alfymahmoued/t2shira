@@ -5,15 +5,38 @@ const vis_model = require('../models/visa_model')
 const doc_type_model = require('../models/doc_type_model')
 const doc_model = require('../models/doc_model')
 const cv_search_types_model = require('../models/cv_search_types_model')
-const { verifyTokenAndAdmin, verifyToken, sendNotification } = require('../helper')
+const { verifyTokenAndAdmin, createToken, sendNotification } = require('../helper')
 const banner_model = require('../models/banner_model')
 const notification_model = require('../models/notification_model')
 const user_model = require('../models/user_model')
 const fs = require('fs');
 const cv_search_types_users_model = require('../models/cv_search_types_users_model')
 const country_model = require('../models/country_model')
+const hajj_umra_model = require('../models/hajj_umra_model')
+const trip_model = require('../models/trip_model')
 
-router.post('/specialties', verifyToken, async (req, res) => {
+router.post('/login', (req, res) => {
+
+    try {
+        const { username, password } = req.body
+
+        if (process.env.ADMIN_USERNAME == username && process.env.ADMIN_PASSWORD == password) {
+
+            res.json({
+                'token': createToken('admin', true, false)
+            })
+
+        } else {
+            res.sendStatus(401)
+        }
+
+    } catch (e) {
+        res.sendStatus(500)
+    }
+
+})
+
+router.post('/specialties', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -35,7 +58,7 @@ router.post('/specialties', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/specialties', verifyToken, async (req, res) => {
+router.put('/specialties', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -68,7 +91,7 @@ router.put('/specialties', verifyToken, async (req, res) => {
 })
 
 
-router.delete('/specialties/:id', verifyToken, async (req, res) => {
+router.delete('/specialties/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -89,7 +112,7 @@ router.delete('/specialties/:id', verifyToken, async (req, res) => {
     }
 })
 
-router.get('/searchTypesUsers/:page', verifyToken, async (req, res) => {
+router.get('/searchTypesUsers/:page', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -112,7 +135,7 @@ router.get('/searchTypesUsers/:page', verifyToken, async (req, res) => {
         })
     }
 })
-router.get('/cv', verifyToken, async (req, res) => {
+router.get('/cv', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -131,7 +154,7 @@ router.get('/cv', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/cv', verifyToken, async (req, res) => {
+router.put('/cv', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -152,7 +175,7 @@ router.put('/cv', verifyToken, async (req, res) => {
     }
 })
 
-router.delete('/cv/:id', verifyToken, async (req, res) => {
+router.delete('/cv/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -174,7 +197,7 @@ router.delete('/cv/:id', verifyToken, async (req, res) => {
 })
 
 
-router.get('/visas', verifyToken, async (req, res) => {
+router.get('/visas', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -193,7 +216,7 @@ router.get('/visas', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/visa', verifyToken, async (req, res) => {
+router.put('/visa', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -216,7 +239,7 @@ router.put('/visa', verifyToken, async (req, res) => {
     }
 })
 
-router.delete('/visa/:id', verifyToken, async (req, res) => {
+router.delete('/visa/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -241,7 +264,7 @@ router.delete('/visa/:id', verifyToken, async (req, res) => {
 ///////////////// doc types /////////////////////
 
 
-router.post('/docTypes', verifyToken, async (req, res) => {
+router.post('/docTypes', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -263,7 +286,7 @@ router.post('/docTypes', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/docTypes', verifyToken, async (req, res) => {
+router.put('/docTypes', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -296,7 +319,7 @@ router.put('/docTypes', verifyToken, async (req, res) => {
 })
 
 
-router.delete('/docTypes/:id', verifyToken, async (req, res) => {
+router.delete('/docTypes/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -320,7 +343,7 @@ router.delete('/docTypes/:id', verifyToken, async (req, res) => {
 
 ///////////////// documentation /////////////////////
 
-router.get('/docs', verifyToken, async (req, res) => {
+router.get('/docs', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -341,7 +364,7 @@ router.get('/docs', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/doc', verifyToken, async (req, res) => {
+router.put('/doc', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -364,7 +387,7 @@ router.put('/doc', verifyToken, async (req, res) => {
     }
 })
 
-router.delete('/doc/:id', verifyToken, async (req, res) => {
+router.delete('/doc/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -389,7 +412,7 @@ router.delete('/doc/:id', verifyToken, async (req, res) => {
 
 ///////////////// Cvs Search Plans /////////////////////
 
-router.post('/cvSearchType', verifyToken, async (req, res) => {
+router.post('/cvSearchType', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -411,7 +434,7 @@ router.post('/cvSearchType', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/cvSearchType', verifyToken, async (req, res) => {
+router.put('/cvSearchType', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -432,7 +455,7 @@ router.put('/cvSearchType', verifyToken, async (req, res) => {
     }
 })
 
-router.delete('/cvSearchType/:id', verifyToken, async (req, res) => {
+router.delete('/cvSearchType/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -456,7 +479,7 @@ router.delete('/cvSearchType/:id', verifyToken, async (req, res) => {
 
 ///////////////// Banners /////////////////////
 
-router.post('/banners', verifyToken, async (req, res) => {
+router.post('/banners', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -478,7 +501,7 @@ router.post('/banners', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/banners', verifyToken, async (req, res) => {
+router.put('/banners', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -499,7 +522,7 @@ router.put('/banners', verifyToken, async (req, res) => {
     }
 })
 
-router.delete('/banners/:id', verifyToken, async (req, res) => {
+router.delete('/banners/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -523,7 +546,7 @@ router.delete('/banners/:id', verifyToken, async (req, res) => {
 
 ///////////////// Notifications /////////////////////
 
-router.post('/notifications', verifyToken, async (req, res) => {
+router.post('/notifications', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -577,7 +600,7 @@ router.post('/notifications', verifyToken, async (req, res) => {
 
 ///////////////// CONDITOONS /////////////////////
 
-router.post('/conditions', verifyToken, async (req, res) => {
+router.post('/conditions', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -610,7 +633,7 @@ router.post('/conditions', verifyToken, async (req, res) => {
 ///////////////// countries /////////////////////
 
 
-router.post('/countries', verifyToken, async (req, res) => {
+router.post('/countries', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -633,7 +656,7 @@ router.post('/countries', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/countries', verifyToken, async (req, res) => {
+router.put('/countries', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -666,7 +689,7 @@ router.put('/countries', verifyToken, async (req, res) => {
 })
 
 
-router.delete('/countries/:id', verifyToken, async (req, res) => {
+router.delete('/countries/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
@@ -677,6 +700,134 @@ router.delete('/countries/:id', verifyToken, async (req, res) => {
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي نوع الدولة' : 'The Country type was not found'
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+///////////////// TRIPS /////////////////////
+
+router.get('/review-trips', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        var pageInNumber = Number(req.params.page)
+
+        if (!pageInNumber && pageInNumber < 1) pageInNumber = 1
+        pageInNumber--
+
+        const result = await trip_model.find({ accepted: false }).sort({ createdAt: -1 }).skip(pageInNumber * 10).limit(10)
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.get('/approve-hajj-trip/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+
+        const result = await hajj_umra_model.findOneAndUpdate({ _id: req.params.id }, { accepted: true }, { returnOriginal: false })
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.get('/unApprove-hajj-trip/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const result = await hajj_umra_model.findOneAndDelete({ _id: req.params.id })
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.get('/review-hajj-trips', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        var pageInNumber = Number(req.params.page)
+
+        if (!pageInNumber && pageInNumber < 1) pageInNumber = 1
+        pageInNumber--
+
+        const hajj = await hajj_umra_model.find({ accepted: false }).sort({ createdAt: -1 }).skip(pageInNumber * 10).limit(10)
+
+        res.json({
+            'status': true,
+            'data': hajj
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.get('/approve-trip/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+
+        const result = await trip_model.findOneAndUpdate({ _id: req.params.id }, { accepted: true }, { returnOriginal: false })
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.get('/unApprove-trip/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const result = await trip_model.findOneAndDelete({ _id: req.params.id })
+
+        res.json({
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
