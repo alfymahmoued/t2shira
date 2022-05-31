@@ -5,7 +5,7 @@ const trip_booking = require('../models/trip_booking')
 const notification_model = require('../models/notification_model')
 const company_model = require('../models/company_model')
 
-const { sendNotification } = require('../helper')
+const { sendNotification, serverURL } = require('../helper')
 
 const user_model = require('../models/user_model')
 
@@ -130,11 +130,17 @@ router.get('/callback', async (req, res) => {
 
         const realHmac = await getHMACByOrderId(paymentToken, id)
 
-        res.json({
-            'stauts': realHmac == hmac,
-            'data': realHmac == hmac ? 'success' : 'Failed',
-        })
+        const isValid = realHmac == hmac
 
+
+
+        /* res.json({
+             'stauts': realHmac == hmac,
+             'data': realHmac == hmac ? 'success' : 'Failed',
+         })*/
+
+        res.redirect(serverURL + `paymentstatus?status=${isValid}`)
+        
     } catch (e) {
 
         console.log(e)
