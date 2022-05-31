@@ -302,5 +302,22 @@ router.get('/', verifyToken, async (req, res) => {
         })
     }
 })
+router.delete('/:id', verifyToken, async (req, res) => {
 
+    try {
+
+        const result = await cv_model.findOneAndDelete({ _id: req.params.id, user_id: req.user.id })
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
 module.exports = router
