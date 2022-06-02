@@ -2,7 +2,6 @@ const router = require('express').Router()
 const user_model = require('../models/user_model')
 const { verifyToken } = require('../helper')
 const notification_model = require('../models/notification_model')
-const fs = require('fs');
 const chat_model = require('../models/chat_model');
 const trip_booking = require('../models/trip_booking');
 const trip_model = require('../models/trip_model');
