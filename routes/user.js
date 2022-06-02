@@ -7,6 +7,7 @@ const chat_model = require('../models/chat_model');
 const trip_booking = require('../models/trip_booking');
 const trip_model = require('../models/trip_model');
 const itinerary_model = require('../models/itinerary_model');
+const condition_model = require('../models/condition_model');
 
 router.get('/profile', verifyToken, async (req, res) => {
 
@@ -40,7 +41,7 @@ router.get('/profile/:id', verifyToken, async (req, res) => {
         const result = await user_model.findById(req.params.id)
 
         if (!result) res.status = 404
-        
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
@@ -162,7 +163,7 @@ router.get('/conditions', async (req, res) => {
 
     try {
 
-        const data = fs.readFileSync(__dirname + '/../conditions.txt', 'utf8')
+        const data = await condition_model.find({ type: 1 })
         res.json({
             'status': true,
             'data': data
@@ -175,6 +176,42 @@ router.get('/conditions', async (req, res) => {
         })
     }
 })
+
+router.get('/about-us', async (req, res) => {
+
+    try {
+
+        const data = await condition_model.find({ type: 2 })
+        res.json({
+            'status': true,
+            'data': data
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+router.get('/common-questions', async (req, res) => {
+
+    try {
+
+        const data = await condition_model.find({ type: 3 })
+        res.json({
+            'status': true,
+            'data': data
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
 
 ///////////////// CHAT ////////////////////
 

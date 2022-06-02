@@ -14,6 +14,7 @@ const cv_search_types_users_model = require('../models/cv_search_types_users_mod
 const country_model = require('../models/country_model')
 const hajj_umra_model = require('../models/hajj_umra_model')
 const trip_model = require('../models/trip_model')
+const condition_model = require('../models/condition_model')
 
 router.post('/login', (req, res) => {
 
@@ -604,9 +605,84 @@ router.post('/conditions', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
+        const object = new condition_model(req.body)
+
+        const result = await object.save()
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.put('/conditions', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+
+        const { language } = req.headers
+
+        if (req.body.id) {
+
+            const result = await condition_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
+
+            res.json({
+                'status': result ? true : false,
+                'data': result ? result : language == 'ar' ? 'لم يتم العثور علي هذا الشرط' : 'Theis Condition was not found'
+            })
+
+        } else {
+            res.json({
+                'status': false,
+                'data': 'Bad Request'
+            })
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+router.delete('/conditions/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const { language } = req.headers
+
+        const result = await country_model.findOneAndDelete({ _id: req.params.id })
+
+        res.json({
+            'status': result ? true : false,
+            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي هذا الشرط' : 'Theis Condition was not found'
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.post('/common-questions', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
         if (req.body.data) {
 
-            fs.writeFileSync(__dirname + '/../conditions.txt', req.body.data)
+            fs.writeFileSync(__dirname + '/../common_questions.txt', req.body.data)
 
             res.json({
                 'status': true,
@@ -629,7 +705,34 @@ router.post('/conditions', verifyTokenAndAdmin, async (req, res) => {
     }
 })
 
+router.post('/common-questions', verifyTokenAndAdmin, async (req, res) => {
 
+    try {
+
+        if (req.body.data) {
+
+            fs.writeFileSync(__dirname + '/../common_questions.txt', req.body.data)
+
+            res.json({
+                'status': true,
+                'data': req.body.data
+            })
+
+        } else {
+            res.json({
+                'status': false,
+                'data': 'Bad Request'
+            })
+        }
+
+    } catch (e) {
+        console.log(e)
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
 ///////////////// countries /////////////////////
 
 
@@ -803,7 +906,6 @@ router.get('/review-hajj-trips/:page', verifyTokenAndAdmin, async (req, res) => 
 router.get('/approve-trip/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
-
 
         const result = await trip_model.findOneAndUpdate({ _id: req.params.id }, { accepted: true }, { returnOriginal: false })
 
