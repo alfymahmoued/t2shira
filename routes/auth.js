@@ -90,6 +90,7 @@ router.post('/login', async (req, res) => {
                     })
 
                 } else {
+                    res.status = 404
                     res.json({
                         'status': false,
                         'data': language == 'ar' ? '.هذا الحساب ليس مسجلاً لدينا' : 'This Account Not Exist.'
@@ -97,6 +98,7 @@ router.post('/login', async (req, res) => {
                 }
 
             } else {
+                res.status = 404
                 res.json({
                     'status': false,
                     'data': language == 'ar' ? '.البريد الالكتروني او كلمة السر ليس صحيحا' : 'Email Or Password Invalid.'

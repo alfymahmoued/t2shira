@@ -38,23 +38,6 @@ async function paymentKeys(token, orderId, amount, billingData) {
             "lock_order_when_paid": "false",
             "billing_data": billingData
         })
-    /* "billing_data": {
-         "apartment": "803",
-         "email": "claudette09@exa.com",
-         "floor": "42",
-         "first_name": "Clifford",
-         "street": "Ethan Land",
-         "building": "8028",
-         "phone_number": "+86(8)9135210487",
-         "shipping_method": "PKG",
-         "postal_code": "01898",
-         "city": "Jaskolskiburgh",
-         "country": "CR",
-         "last_name": "Nicolas",
-         "state": "Utah",
-         "type": 'plan',
-         'user_id': '_u'
-     }*/
     return result.data.token
 }
 

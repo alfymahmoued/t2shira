@@ -676,63 +676,6 @@ router.delete('/conditions/:id', verifyTokenAndAdmin, async (req, res) => {
     }
 })
 
-router.post('/common-questions', verifyTokenAndAdmin, async (req, res) => {
-
-    try {
-
-        if (req.body.data) {
-
-            fs.writeFileSync(__dirname + '/../common_questions.txt', req.body.data)
-
-            res.json({
-                'status': true,
-                'data': req.body.data
-            })
-
-        } else {
-            res.json({
-                'status': false,
-                'data': 'Bad Request'
-            })
-        }
-
-    } catch (e) {
-        console.log(e)
-        res.json({
-            'status': false,
-            'data': e
-        })
-    }
-})
-
-router.post('/common-questions', verifyTokenAndAdmin, async (req, res) => {
-
-    try {
-
-        if (req.body.data) {
-
-            fs.writeFileSync(__dirname + '/../common_questions.txt', req.body.data)
-
-            res.json({
-                'status': true,
-                'data': req.body.data
-            })
-
-        } else {
-            res.json({
-                'status': false,
-                'data': 'Bad Request'
-            })
-        }
-
-    } catch (e) {
-        console.log(e)
-        res.json({
-            'status': false,
-            'data': e
-        })
-    }
-})
 ///////////////// countries /////////////////////
 
 
