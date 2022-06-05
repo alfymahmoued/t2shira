@@ -53,7 +53,20 @@ async function getHMACByOrderId(token, orderId) {
             }
         )
     return result.data.hmac
-}
+}/*
+'city': '_',
+'first_name': '_',
+'last_name': '_',
+'email': '_',
+'apartment': '',
+'building': '_',
+'floor': '_',
+'street': "_",
+'phone_number': "_",
+'shipping_method': "_",
+'postal_code': "_",
+'country': "_",
+'state': "_",*/
 
 module.exports = {
     getPaymobToken,

@@ -63,6 +63,8 @@ router.put('/profile', verifyToken, async (req, res) => {
         delete req.body.uid
         delete req.body.provider
         delete req.body.email
+        delete req.body.search_type_end
+        delete req.body.search_type_id
 
         const result = await user_model.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false })
 
