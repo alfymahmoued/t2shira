@@ -216,6 +216,28 @@ router.get('/common-questions', async (req, res) => {
 })
 
 
+router.post('/complaint', verifyToken, async (req, res) => {
+    try {
+
+        req.body.user_id = req.user.id
+        const object = new complaint_model(req.body)
+        const result = await object.save()
+
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        console.log(e)
+        res.status(500).json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
 ///////////////// CHAT ////////////////////
 
 router.post('/chat', verifyToken, async (req, res) => {
@@ -357,26 +379,5 @@ router.get('/trips/:page', verifyToken, async (req, res) => {
     }
 })
 
-router.post('/complaint', verifyToken, async (req, res) => {
-    try {
-
-        req.body.user_id = req.user.id
-        const object = new complaint_model(req.body)
-        const result = await object.save()
-
-
-        res.json({
-            'status': true,
-            'data': result,
-        })
-
-    } catch (e) {
-
-        res.status(500).json({
-            'status': false,
-            'data': e
-        })
-    }
-})
 
 module.exports = router
