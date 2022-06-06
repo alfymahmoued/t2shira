@@ -7,29 +7,8 @@ const { getPaymobToken, makeOrder, paymentKeys } = require('../payment_helper')
 const { verifyToken, serverURL } = require('../helper')
 const fs = require("fs");
 const html = fs.readFileSync("./cv_template.html", "utf8");
-
-const pdf = require("pdf-creator-node");
-
-const options = {
-    format: "A3",
-    orientation: "portrait",
-    border: "10mm",
-    header: {
-        height: "45mm",
-        contents: '<div style="text-align: center;">Sherif Sobhy CV</div>'
-    },
-    footer: {
-        height: "28mm",
-        contents: {
-
-            default: '<span style="color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-
-        }
-    }
-};
-
+const handlebars = require('handlebars')
 const user_model = require('../models/user_model')
-const cv_search_types_users_model = require('../models/cv_search_types_users_model')
 const country_model = require('../models/country_model')
 
 router.get('/searchTypes', async (req, res) => {
@@ -100,27 +79,6 @@ router.post('/addSearchType', verifyToken, async (req, res) => {
                 'data': `https://accept.paymob.com/api/acceptance/iframes/373719?payment_token=${iFrameToken}`
             })
 
-            /*req.body.user_id = req.user.id
-            req.body.duration = type._doc.duration
- 
-            const object = new cv_search_types_users_model(req.body)
- 
-            await object.save()
- 
-            const user = await user_model.findOneAndUpdate({ _id: req.user.id }, { search_type_id: object._id, search_type_end: new Date().getTime() + (type._doc.duration * 86400000) }, { returnOriginal: false, setDefaultsOnInsert: true })
- 
-            if (user) {
-                res.json({
-                    'status': true,
-                    'data': user
-                })
- 
-        } else {
-            res.json({
-                'status': false,
-                'data': language == 'ar' ? 'هذا الحساب غير موجود لدينا' : 'This account we don\'t have.'
-            })
-        }*/
         } else {
             res.json({
                 'status': false,
@@ -243,49 +201,45 @@ router.post('/', verifyToken, async (req, res) => {
             'data': language == 'ar' ? 'التخصص غير موجود' : 'The Specialty is not Exist'
         })
 
-        const pdfPath = uuidv4() + uuidv4() + '.pdf'
+        const pdfPath = uuidv4() + uuidv4() + '.html'
 
         req.body.user_id = req.user.id
 
-        req.body.pdf_url = `${serverURL}files/${pdfPath}`
+        req.body.pdf_url = `${serverURL}files/cvs/${pdfPath}`
 
         const cvObject = new cv_model(req.body)
 
         const result = await cvObject.save()
 
 
-        var document = {
-            html: html,
-            childProcessOptions: {
-                env: {
-                    OPENSSL_CONF: '/dev/null',
-                },
-            },
-            data: {
-                logo_url: 'http://localhost:2222/files/logo.png',
-                name: result._doc.name,
-                picture: result._doc.picture,
-                phone: result._doc.phone,
-                picture: result._doc.picture,
-                phone_optinal: result._doc.phone_optinal,
-                email: result._doc.email,
-                current_place: result._doc.current_place,
-                city: result._doc.city,
-                zip_code: result._doc.zip_code,
-                date_of_birth: result._doc.date_of_birth,
-                specialty_id: `${specialty._doc.name_ar} | ${specialty._doc.name_en}`,
-                social_status: result._doc.social_status,
-                sex: result._doc.sex,
-                id_number: result._doc.id_number,
-                place_of_birth: result._doc.place_of_birth,
-                educations: result._doc.education,
-                jobs: result._doc.jobs,
 
-            },
-            path: "./public/files/" + pdfPath,
-            type: "",
-        };
-        pdf.create(document, options)
+        var template = handlebars.compile(html);
+
+        var data = {
+            logo_url: 'http://localhost:2222/files/logo.png',
+            name: result._doc.name,
+            picture: result._doc.picture,
+            phone: result._doc.phone,
+            picture: result._doc.picture,
+            phone_optinal: result._doc.phone_optinal,
+            email: result._doc.email,
+            current_place: result._doc.current_place,
+            city: result._doc.city,
+            zip_code: result._doc.zip_code,
+            date_of_birth: result._doc.date_of_birth,
+            specialty_id: `${specialty._doc.name_ar} | ${specialty._doc.name_en}`,
+            social_status: result._doc.social_status,
+            sex: result._doc.sex,
+            id_number: result._doc.id_number,
+            place_of_birth: result._doc.place_of_birth,
+            educations: result._doc.education,
+            jobs: result._doc.jobs,
+
+        }
+
+        fs.writeFile('./public/files/cvs/' + pdfPath, template(data), function (err) {
+            if (err) throw err;
+        })
 
         res.json({
             'status': true,
