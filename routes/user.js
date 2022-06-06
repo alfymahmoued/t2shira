@@ -357,9 +357,7 @@ router.get('/trips/:page', verifyToken, async (req, res) => {
     }
 })
 
-
-router.post('/add-complaint', verifyToken, async (req, res) => {
-
+router.post('/complaint', verifyToken, async (req, res) => {
     try {
 
         req.body.user_id = req.user.id
@@ -380,4 +378,5 @@ router.post('/add-complaint', verifyToken, async (req, res) => {
         })
     }
 })
+
 module.exports = router
