@@ -361,7 +361,6 @@ router.post('/complaint', verifyToken, async (req, res) => {
 
     try {
 
-
         req.body.user_id = req.user.id
         const object = new complaint_model(req.body)
         const result = await object.save()
@@ -373,7 +372,8 @@ router.post('/complaint', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+
+        res.status(500).json({
             'status': false,
             'data': e
         })

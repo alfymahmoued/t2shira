@@ -44,21 +44,20 @@ router.post('/register', async (req, res) => {
 
             } else {
 
-                res.json({
+                res.status(404).json({
                     'status': false,
                     'data': language == 'ar' ? 'البريد الالكتروني ليس مسجلا لدينا' : 'Email is not Registed'
                 })
             }
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -97,16 +96,14 @@ router.post('/login', async (req, res) => {
                     })
 
                 } else {
-                    res.status = 404
-                    res.json({
+                    res.status(404).json({
                         'status': false,
                         'data': language == 'ar' ? '.هذا الحساب ليس مسجلاً لدينا' : 'This Account Not Exist.'
                     })
                 }
 
             } else {
-                res.status = 404
-                res.json({
+                res.status(404).json({
                     'status': false,
                     'data': language == 'ar' ? '.البريد الالكتروني او كلمة السر ليس صحيحا' : 'Email Or Password Invalid.'
                 })
@@ -114,13 +111,13 @@ router.post('/login', async (req, res) => {
 
         } else {
 
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -147,8 +144,8 @@ router.post('/social', async (req, res) => {
                 if (result) {
 
                     if (result._doc.blocked == true) {
-                        res.status = 500
-                        return res.json({
+
+                        return res.status(500).json({
                             'status': false,
                             'data': language == 'ar' ? '.هذا الحساب محظور' : 'This Account is Blocked.',
                         })
@@ -186,7 +183,7 @@ router.post('/social', async (req, res) => {
                 }
 
             } else {
-                res.json({
+                res.status(500).json({
                     'status': false,
                     'data': language == 'ar' ? 'فشل تسجيل الدخول حاول مرة أخري.' : 'Login failed, try again.'
                 })
@@ -194,13 +191,13 @@ router.post('/social', async (req, res) => {
 
         } else {
 
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
