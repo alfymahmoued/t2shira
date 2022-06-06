@@ -231,14 +231,14 @@ router.post('/', verifyToken, async (req, res) => {
 
         const { language } = req.headers
 
-        if (!req.body.specialty_id) return res.json({
+        if (!req.body.specialty_id) return res.status(500).json({
             'status': false,
             'data': 'Bad Request'
         })
 
         const specialty = await specialty_model.findById(req.body.specialty_id)
 
-        if (!specialty) return res.json({
+        if (!specialty) return res.status(404).json({
             'status': false,
             'data': language == 'ar' ? 'التخصص غير موجود' : 'The Specialty is not Exist'
         })
