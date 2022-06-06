@@ -228,6 +228,21 @@ router.post('/search', verifyToken, async (req, res) => {
 router.post('/', verifyToken, async (req, res) => {
 
     try {
+
+        const { language } = req.headers
+
+        if (!req.body.specialty_id) return res.json({
+            'status': false,
+            'data': 'Bad Request'
+        })
+
+        const specialty = await specialty_model.findById(req.body.specialty_id)
+
+        if (!specialty) return res.json({
+            'status': false,
+            'data': language == 'ar' ? 'التخصص غير موجود' : 'The Specialty is not Exist'
+        })
+
         const pdfPath = uuidv4() + uuidv4() + '.pdf'
 
         req.body.user_id = req.user.id
@@ -238,7 +253,6 @@ router.post('/', verifyToken, async (req, res) => {
 
         const result = await cvObject.save()
 
-        const specialty = await specialty_model.findById(result._doc.specialty_id)
 
         var document = {
             html: html,
