@@ -7,6 +7,7 @@ const trip_booking = require('../models/trip_booking');
 const trip_model = require('../models/trip_model');
 const itinerary_model = require('../models/itinerary_model');
 const condition_model = require('../models/condition_model');
+const complaint_model = require('../models/complaint_model');
 
 router.get('/profile', verifyToken, async (req, res) => {
 
@@ -65,7 +66,7 @@ router.put('/profile', verifyToken, async (req, res) => {
         delete req.body.email
         delete req.body.search_type_end
         delete req.body.search_type_id
-
+        delete req.body.blocked
         const result = await user_model.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false })
 
         res.json({
@@ -273,7 +274,7 @@ router.get('/chat/:page', verifyToken, async (req, res) => {
         if (!pageInNumber && pageInNumber < 1) pageInNumber = 1
         pageInNumber--
 
-        const result = await chat_model.find({ user_id: req.user.id }).skip(pageInNumber * 20).limit(20)
+        const result = await chat_model.find({ user_id: req.user.id }).sort({ createdAt: -1 }).skip(pageInNumber * 20).limit(20)
 
 
         res.json({
@@ -348,6 +349,30 @@ router.get('/trips/:page', verifyToken, async (req, res) => {
 
     } catch (e) {
         console.log(e)
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+router.post('/complaint', verifyToken, async (req, res) => {
+
+    try {
+
+
+        req.body.user_id = req.user.id
+        const object = new complaint_model(req.body)
+        const result = await object.save()
+
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
         res.json({
             'status': false,
             'data': e

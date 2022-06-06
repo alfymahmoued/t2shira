@@ -82,6 +82,13 @@ router.post('/login', async (req, res) => {
 
                 if (result) {
 
+                    if (result._doc.blocked == true) {
+                        res.status = 500
+                        return res.json({
+                            'status': false,
+                            'data': language == 'ar' ? '.هذا الحساب محظور' : 'This Account is Blocked.',
+                        })
+                    }
                     result._doc.token = createToken(result._doc._id, false, false)
 
                     res.json({
@@ -138,6 +145,14 @@ router.post('/social', async (req, res) => {
                 const result = await user_model.findOneAndUpdate({ uid: firebaseUser.uid, provider }, { fcmToken })
 
                 if (result) {
+
+                    if (result._doc.blocked == true) {
+                        res.status = 500
+                        return res.json({
+                            'status': false,
+                            'data': language == 'ar' ? '.هذا الحساب محظور' : 'This Account is Blocked.',
+                        })
+                    }
 
                     result._doc.token = createToken(result._doc._id, false, false)
 

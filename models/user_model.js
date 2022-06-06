@@ -14,6 +14,6 @@ const userSchema = new mongoose.Schema({
     language: { type: String, default: 'en' },
     search_type_id: { type: String },
     search_type_end: { type: Number },
-
+    blocked: { type: Boolean, default: false },
 }, { versionKey: false, timestamps: true, })
 module.exports = mongoose.model("users", userSchema);

@@ -9,12 +9,13 @@ const { verifyTokenAndAdmin, createToken, sendNotification } = require('../helpe
 const banner_model = require('../models/banner_model')
 const notification_model = require('../models/notification_model')
 const user_model = require('../models/user_model')
-const fs = require('fs');
 const cv_search_types_users_model = require('../models/cv_search_types_users_model')
 const country_model = require('../models/country_model')
 const hajj_umra_model = require('../models/hajj_umra_model')
 const trip_model = require('../models/trip_model')
 const condition_model = require('../models/condition_model')
+const complaint_model = require('../models/complaint_model')
+const chat_model = require('../models/chat_model')
 
 router.post('/login', (req, res) => {
 
@@ -874,6 +875,168 @@ router.get('/unApprove-trip/:id', verifyTokenAndAdmin, async (req, res) => {
         res.json({
             'status': true,
             'data': result
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+router.get('/complaints/:page', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        var pageInNumber = Number(req.params.page)
+
+        if (!pageInNumber && pageInNumber < 1) pageInNumber = 1
+        pageInNumber--
+
+        const result = await complaint_model.find({}).sort({ createdAt: -1 }).skip(pageInNumber * 10).limit(10)
+
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+router.delete('/complaints/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+
+        const result = await complaint_model.findOneAndDelete({ _id: req.params.id })
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+//////////////// USERS ////////////////
+
+
+router.get('/users/:page', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        var pageInNumber = Number(req.params.page)
+
+        if (!pageInNumber && pageInNumber < 1) pageInNumber = 1
+        pageInNumber--
+
+        const result = await user_model.find({}).sort({ createdAt: -1 }).skip(pageInNumber * 10).limit(10)
+
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+
+router.get('/block-user/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+
+        const result = await user_model.findOneAndUpdate({ _id: req.params.id }, { blocked: true }, { returnOriginal: false })
+
+        res.json({
+            'status': result ? true : false,
+            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
+        })
+
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+router.put('/users/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        if (!req.body.id) return res.json({
+            'status': false,
+            'data': 'Bad Request'
+        })
+
+
+        const result = await user_model.findOneAndUpdate({ _id: req.params.id }, req.body, { returnOriginal: false })
+
+        res.json({
+            'status': result ? true : false,
+            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
+        })
+
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+router.delete('/users/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const result = await user_model.findOneAndDelete({ _id: req.params.id })
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.delete('/delete-all-chats/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const result = await chat_model.deleteMany({ user_id: req.params.id })
+
+        res.json({
+            'status': true,
+            'data': result,
         })
 
     } catch (e) {
