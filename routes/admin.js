@@ -1028,7 +1028,70 @@ router.delete('/users/:id', verifyTokenAndAdmin, async (req, res) => {
     }
 })
 
-router.delete('/delete-all-chats/:id', verifyTokenAndAdmin, async (req, res) => {
+router.get('/chat-contacts', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const contacts = await chat_model.find({}).select('user_id').distinct('user_id')
+
+        const users = await user_model.find({ _id: { $in: contacts } })
+
+        res.json({
+            'status': true,
+            'data': users,
+        })
+
+    } catch (e) {
+        console.log(e)
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.get('/chats/:id', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const result = await chat_model.find({ user_id: req.params.id }).sort({ createdAt: -1 })
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.post('/chats', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        req.body.by_user = false
+        const object = new chat_model(req.body)
+
+        const result = await object.save()
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+router.delete('/end-chat/:id', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
