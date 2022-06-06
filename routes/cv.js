@@ -256,6 +256,11 @@ router.post('/', verifyToken, async (req, res) => {
 
         var document = {
             html: html,
+            childProcessOptions: {
+                env: {
+                    OPENSSL_CONF: '/dev/null',
+                },
+            },
             data: {
                 logo_url: 'http://localhost:2222/files/logo.png',
                 name: result._doc.name,
