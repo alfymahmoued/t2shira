@@ -216,7 +216,7 @@ router.post('/', verifyToken, async (req, res) => {
         var template = handlebars.compile(html);
 
         var data = {
-            logo_url: 'http://localhost:2222/files/logo.png',
+            logo_url: serverURL + '/files/logo.png',
             name: result._doc.name,
             picture: result._doc.picture,
             phone: result._doc.phone,
