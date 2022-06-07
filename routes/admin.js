@@ -165,7 +165,31 @@ router.get('/cv', verifyTokenAndAdmin, async (req, res) => {
         })
     }
 })
+router.get('/cv-by-number/:number', verifyTokenAndAdmin, async (req, res) => {
 
+    try {
+
+        const { language } = req.headers
+
+        const result = await cv_model.findOne({ number: req.params.number })
+
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'السيرة الذاتية غير موجودة' : 'CV is Not Exist'
+        })
+        
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.status(500).json({
+            'status': false,
+            'data': e
+        })
+    }
+})
 router.put('/cv', verifyTokenAndAdmin, async (req, res) => {
 
     try {

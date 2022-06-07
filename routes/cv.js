@@ -155,8 +155,7 @@ router.post('/search', verifyToken, async (req, res) => {
 
                 const result = await cv_model.find(
                     {
-                        country_id: country_id, specialty_id: specialty_id
-
+                        $or: [{ country_id }, { specialty_id }]
                     }).limit(20)
 
                 res.json({
@@ -187,7 +186,7 @@ router.post('/', verifyToken, async (req, res) => {
 
         const { language } = req.headers
 
-        if (!req.body.specialty_id) return res.status(500).json({
+        if (!req.body.specialty_id || !req.body.country_id) return res.status(500).json({
             'status': false,
             'data': 'Bad Request'
         })
@@ -197,6 +196,13 @@ router.post('/', verifyToken, async (req, res) => {
         if (!user) return res.status(404).json({
             'status': false,
             'data': language == 'ar' ? 'الحساب غير موجود' : 'The User is not Exist'
+        })
+
+        const country = await country_model.findById(req.body.country_id)
+
+        if (!country) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'الدولة غير موجودة' : 'The Country is not Exist'
         })
 
         const specialty = await specialty_model.findById(req.body.specialty_id)
