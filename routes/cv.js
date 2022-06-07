@@ -273,8 +273,6 @@ router.post('/', verifyToken, async (req, res) => {
 
         const result = await cvObject.save()
 
-
-
         var template = handlebars.compile(html);
 
         var data = {
@@ -289,6 +287,7 @@ router.post('/', verifyToken, async (req, res) => {
             education: result._doc.education,
             jobs: result._doc.jobs,
             experiences: result._doc.experiences,
+            bio_field: user._doc.language == 'ar' ? 'المعلومات الحيوية' : 'Bio-Data',
             name_field: user._doc.language == 'ar' ? 'الاسم' : 'Name',
             date_of_birth_field: user._doc.language == 'ar' ? 'تاريخ الميلاد' : 'Date of Birth',
             sex_field: user._doc.language == 'ar' ? 'الجنس' : 'Sex',
