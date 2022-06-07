@@ -194,6 +194,13 @@ router.post('/', verifyToken, async (req, res) => {
             'data': 'Bad Request'
         })
 
+        const user = await user_model.findById(req.user.id)
+
+        if (!user) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'الحساب غير موجود' : 'The User is not Exist'
+        })
+
         const specialty = await specialty_model.findById(req.body.specialty_id)
 
         if (!specialty) return res.status(404).json({
@@ -282,7 +289,14 @@ router.post('/', verifyToken, async (req, res) => {
             education: result._doc.education,
             jobs: result._doc.jobs,
             experiences: result._doc.experiences,
-
+            name_field: user._doc.language == 'ar' ? 'الاسم' : 'Name',
+            date_of_birth_field: user._doc.language == 'ar' ? 'تاريخ الميلاد' : 'Date of Birth',
+            sex_field: user._doc.language == 'ar' ? 'الجنس' : 'Sex',
+            place_of_birth_field: user._doc.language == 'ar' ? 'مكان الميلاد' : 'Place Of Birth',
+            social_status_field: user._doc.language == 'ar' ? 'الحالة الاجتماعية' : 'Social Status',
+            jobs_field: user._doc.language == 'ar' ? 'وظائف' : 'Jobs',
+            education_field: user._doc.language == 'ar' ? 'تعليم' : 'Education',
+            skills_field: user._doc.language == 'ar' ? 'مهارات' : 'Skills',
         }
 
         fs.writeFile('./public/files/cvs/' + pdfPath, template(data), function (err) {
