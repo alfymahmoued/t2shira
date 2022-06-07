@@ -299,7 +299,7 @@ router.post('/', verifyToken, async (req, res) => {
             education_field: user._doc.language == 'ar' ? 'تعليم' : 'Education',
             skills_field: user._doc.language == 'ar' ? 'مهارات' : 'Skills',
             cv_number_field: user._doc.language == 'ar' ? 'رقم الموظف' : 'Employee No.',
-            cv_number: String(user._doc.number),
+            cv_number: String(result._doc.number),
         }
 
         fs.writeFile('./public/files/cvs/' + pdfPath, template(data), function (err) { })
