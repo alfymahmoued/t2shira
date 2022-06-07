@@ -36,7 +36,15 @@ async function paymentKeys(token, orderId, amount, billingData) {
             "order_id": orderId,
             "integration_id": integrationId,
             "lock_order_when_paid": "false",
-            "billing_data": billingData
+            "billing_data": billingData,
+            "items": [
+                {
+                    "name": "ASC1515",
+                    "amount_cents": "500000",
+                    "description": "Smart Watch",
+                    "quantity": "1"
+                }
+            ]
         })
     return result.data.token
 }

@@ -407,12 +407,10 @@ router.post('/book', verifyToken, async (req, res) => {
     try {
         const { language } = req.headers
 
-        if (!req.body.trip_id) return res.json({
+        if (!req.body.trip_id) return res.status(404).json({
             'status': false,
             'data': 'Bad Request'
         })
-
-
 
         const trip = await trip_model.findOne({ _id: req.body.trip_id, accepted: true })
 
