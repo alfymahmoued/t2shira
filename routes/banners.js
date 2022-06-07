@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

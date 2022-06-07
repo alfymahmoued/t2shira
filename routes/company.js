@@ -38,7 +38,6 @@ router.post('/register', async (req, res) => {
                     owner_phone,
                     owner_email,
                     email,
-                    //uid: '_',
                     uid: firebaseUser.uid,
                     fcmToken,
                 })
@@ -50,27 +49,26 @@ router.post('/register', async (req, res) => {
                 res.json(
                     {
                         'status': true,
-                        'data': language == 'ar' ? 'تم تسجيل الدخول بنجاح وبانتظار موافقة الادمن' : 'It was successfully logged in and awaiting the approval of the admin'
+                        'data': language == 'ar' ? 'تم تسجيل الحساب بنجاح وبانتظار موافقة الادمن' : 'It was successfully Registed and awaiting the approval of the admin'
                     }
                 )
 
             } else {
 
-                res.json({
+                res.status(404).json({
                     'status': false,
                     'data': language == 'ar' ? 'البريد الالكتروني ليس مسجلا لدينا' : 'Email is not Registed'
                 })
             }
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -102,14 +100,14 @@ router.post('/login', async (req, res) => {
                     })
 
                 } else {
-                    res.json({
+                    res.status(404).json({
                         'status': false,
                         'data': language == 'ar' ? '.هذا الحساب ليس مسجلاً لدينا' : 'This Account Not Exist.'
                     })
                 }
 
             } else {
-                res.json({
+                res.status(404).json({
                     'status': false,
                     'data': language == 'ar' ? '.البريد الالكتروني او كلمة السر ليس صحيحا' : 'Email Or Password Invalid.'
                 })
@@ -117,13 +115,13 @@ router.post('/login', async (req, res) => {
 
         } else {
 
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -138,13 +136,18 @@ router.get('/profile', verifyTokenAndCompany, async (req, res) => {
 
         const result = await company_model.findById(req.user.id)
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
+        })
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -166,13 +169,18 @@ router.put('/profile', verifyTokenAndCompany, async (req, res) => {
 
         const result = await company_model.findOneAndUpdate({ _id: req.params.id }, req.body, { returnOriginal: false })
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي شركة السياحة.' : 'Tourism Company not Exist.'
+        })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي شركة السياحة.' : 'Tourism Company not Exist.'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -187,13 +195,18 @@ router.get('/users/:id', verifyTokenAndCompany, async (req, res) => {
 
         const result = await user_model.findById(req.params.id)
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
+        })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -214,7 +227,7 @@ router.get('/itineraries', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -236,7 +249,7 @@ router.post('/itinerary', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -256,20 +269,25 @@ router.put('/itinerary', verifyTokenAndCompany, async (req, res) => {
 
             const result = await itinerary_model.findOneAndUpdate({ _id: req.body.id, company_id: req.user.id }, req.body, { returnOriginal: false })
 
+            if (!result) return res.status(500).json({
+                'status': false,
+                'data': language == 'ar' ? 'لم يتم العثور علي برنامج الرحلة.' : 'The Itinerary was not found.'
+            })
+
             res.json({
-                'status': result ? true : false,
-                'data': result ? result : language == 'ar' ? 'لم يتم العثور علي برنامج الرحلة.' : 'The Itinerary was not found.'
+                'status': true,
+                'data': result
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -283,15 +301,21 @@ router.delete('/itinerary/:id', verifyTokenAndCompany, async (req, res) => {
         const { language } = req.headers
 
 
+
         const result = await itinerary_model.findOneAndDelete({ _id: req.params.id, company_id: req.user.id })
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي برنامج الرحلة.' : 'The Itinerary was not found.'
+        })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي برنامج الرحلة.' : 'The Itinerary was not found.'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -309,13 +333,14 @@ router.get('/trips', verifyTokenAndCompany, async (req, res) => {
 
         const result = await trip_model.find({ company_id: req.user.id })
 
+
         res.json({
             'status': true,
             'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -337,7 +362,7 @@ router.post('/trip', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -357,20 +382,25 @@ router.put('/trip', verifyTokenAndCompany, async (req, res) => {
 
             const result = await trip_model.findOneAndUpdate({ _id: req.body.id, company_id: req.user.id }, req.body, { returnOriginal: false })
 
+            if (!result) return res.status(404).json({
+                'status': false,
+                'data': language == 'ar' ? 'لم يتم العثور علي الرحلة.' : 'The Trip was not found.'
+            })
+
             res.json({
-                'status': result ? true : false,
-                'data': result ? result : language == 'ar' ? 'لم يتم العثور علي الرحلة.' : 'The Trip was not found.'
+                'status': true,
+                'data': result
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -385,13 +415,18 @@ router.delete('/trip/:id', verifyTokenAndCompany, async (req, res) => {
 
         const result = await trip_model.findOneAndDelete({ _id: req.params.id, company_id: req.user.id })
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي الرحلة.' : 'The Trip was not found.'
+        })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي الرحلة.' : 'The Trip was not found.'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -414,7 +449,7 @@ router.get('/hajj', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -436,7 +471,7 @@ router.post('/hajj', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -456,20 +491,25 @@ router.put('/hajj', verifyTokenAndCompany, async (req, res) => {
 
             const result = await hajj_umra_model.findOneAndUpdate({ _id: req.body.id, company_id: req.user.id }, req.body, { returnOriginal: false })
 
+            if (!result) return res.status(404).json({
+                'status': false,
+                'data': language == 'ar' ? 'لم يتم العثور علي رحلة الحج أو العمرة.' : 'The Hajj Or Umra was not found.'
+            })
+
             res.json({
-                'status': result ? true : false,
-                'data': result ? result : language == 'ar' ? 'لم يتم العثور علي رحلة الحج أو العمرة.' : 'The Hajj Or Umra was not found.'
+                'status': true,
+                'data': result
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -484,13 +524,18 @@ router.delete('/hajj/:id', verifyTokenAndCompany, async (req, res) => {
 
         const result = await hajj_umra_model.findOneAndDelete({ _id: req.params.id, company_id: req.user.id })
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي رحلة الحج أو العمرة.' : 'The Hajj Or Umra was not found.'
+        })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي رحلة الحج أو العمرة.' : 'The Hajj Or Umra was not found.'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -532,7 +577,7 @@ router.get('/bookingTrips/:page', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -555,7 +600,7 @@ router.get('/pendingBookingTrips/:page', verifyTokenAndCompany, async (req, res)
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -584,6 +629,7 @@ router.post('/approveBooking', verifyTokenAndCompany, async (req, res) => {
                 )
             }
         }
+        if (!result) res.status(500)
 
         res.json({
             'status': result ? true : false,
@@ -591,7 +637,7 @@ router.post('/approveBooking', verifyTokenAndCompany, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -609,20 +655,26 @@ router.put('/bookingTrips', verifyTokenAndCompany, async (req, res) => {
 
             const result = await trip_booking.findOneAndUpdate({ _id: req.body.id, company_id: req.user.id }, req.body, { returnOriginal: false })
 
+            if (!result)
+                return res.json({
+                    'status': false,
+                    'data': language == 'ar' ? 'لم يتم العثور علي حجز الرحلة.' : 'The Trip Booking was not found.'
+                })
+
             res.json({
-                'status': result ? true : false,
-                'data': result ? result : language == 'ar' ? 'لم يتم العثور علي حجز الرحلة.' : 'The Trip Booking was not found.'
+                'status': true,
+                'data': result
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -637,13 +689,19 @@ router.delete('/bookingTrips/:id', verifyTokenAndCompany, async (req, res) => {
 
         const result = await trip_booking.findOneAndDelete({ _id: req.params.id, company_id: req.user.id })
 
+        if (!result)
+            return res.json({
+                'status': false,
+                'data': language == 'ar' ? 'لم يتم العثور علي حجز الرحلة.' : 'The Trip Booking was not found.'
+            })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي حجز الرحلة.' : 'The Trip Booking was not found.'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

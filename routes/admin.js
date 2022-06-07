@@ -29,11 +29,17 @@ router.post('/login', (req, res) => {
             })
 
         } else {
-            res.sendStatus(401)
+            res.status(500).json({
+                'ststus': false,
+                'data': 'Error'
+            })
         }
 
     } catch (e) {
-        res.sendStatus(500)
+        res.status(500).json({
+            'ststus': false,
+            'data': e
+        })
     }
 
 })
@@ -53,7 +59,7 @@ router.post('/specialties', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -71,6 +77,8 @@ router.put('/specialties', verifyTokenAndAdmin, async (req, res) => {
 
             const result = await specialty_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
 
+            if (!result) res.status(404)
+
             res.json({
                 'status': result ? true : false,
                 'data': result ? result : language == 'ar' ? 'لم يتم العثور علي التخصص' : 'The specialty was not found'
@@ -84,8 +92,7 @@ router.put('/specialties', verifyTokenAndAdmin, async (req, res) => {
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -101,13 +108,16 @@ router.delete('/specialties/:id', verifyTokenAndAdmin, async (req, res) => {
 
         const result = await specialty_model.findOneAndDelete({ _id: req.params.id })
 
+        if (!result) res.status(404)
+
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي التخصص' : 'The specialty was not found'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -131,7 +141,7 @@ router.get('/searchTypesUsers/:page', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -149,7 +159,7 @@ router.get('/cv', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -163,6 +173,7 @@ router.put('/cv', verifyTokenAndAdmin, async (req, res) => {
         const { language } = req.headers
 
         const result = await cv_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -170,7 +181,7 @@ router.put('/cv', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -184,6 +195,7 @@ router.delete('/cv/:id', verifyTokenAndAdmin, async (req, res) => {
         const { language } = req.headers
 
         const result = await cv_model.findOneAndDelete({ _id: req.params.id })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -191,7 +203,7 @@ router.delete('/cv/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -211,7 +223,7 @@ router.get('/visas', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -227,6 +239,7 @@ router.put('/visa', verifyTokenAndAdmin, async (req, res) => {
         delete req.body.user_id
 
         const result = await vis_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -234,7 +247,7 @@ router.put('/visa', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -249,6 +262,7 @@ router.delete('/visa/:id', verifyTokenAndAdmin, async (req, res) => {
 
 
         const result = await vis_model.findOneAndDelete({ _id: req.params.id })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -256,7 +270,7 @@ router.delete('/visa/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -281,7 +295,7 @@ router.post('/docTypes', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -298,6 +312,7 @@ router.put('/docTypes', verifyTokenAndAdmin, async (req, res) => {
         if (req.body.id) {
 
             const result = await doc_type_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
+            if (!result) res.status(404)
 
             res.json({
                 'status': result ? true : false,
@@ -305,15 +320,14 @@ router.put('/docTypes', verifyTokenAndAdmin, async (req, res) => {
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -328,6 +342,7 @@ router.delete('/docTypes/:id', verifyTokenAndAdmin, async (req, res) => {
         const { language } = req.headers
 
         const result = await doc_type_model.findOneAndDelete({ _id: req.params.id })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -335,7 +350,7 @@ router.delete('/docTypes/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -358,8 +373,7 @@ router.get('/docs', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -375,6 +389,7 @@ router.put('/doc', verifyTokenAndAdmin, async (req, res) => {
         delete req.body.user_id
 
         const result = await doc_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -382,7 +397,7 @@ router.put('/doc', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -397,6 +412,7 @@ router.delete('/doc/:id', verifyTokenAndAdmin, async (req, res) => {
 
 
         const result = await doc_model.findOneAndDelete({ _id: req.params.id })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -404,7 +420,7 @@ router.delete('/doc/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -428,8 +444,7 @@ router.post('/cvSearchType', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -444,13 +459,14 @@ router.put('/cvSearchType', verifyTokenAndAdmin, async (req, res) => {
 
         const result = await cv_search_types_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
 
+        if (!result) res.status(404)
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي نوع الاشتراك.' : 'The subscription type was not found.'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -466,13 +482,15 @@ router.delete('/cvSearchType/:id', verifyTokenAndAdmin, async (req, res) => {
 
         const result = await cv_search_types_model.findOneAndDelete({ _id: req.params.id })
 
+        if (!result) res.status(404)
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي نوع الاشتراك.' : 'The subscription type was not found.'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -495,8 +513,7 @@ router.post('/banners', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -510,6 +527,7 @@ router.put('/banners', verifyTokenAndAdmin, async (req, res) => {
         const { language } = req.headers
 
         const result = await banner_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -517,7 +535,7 @@ router.put('/banners', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -533,13 +551,15 @@ router.delete('/banners/:id', verifyTokenAndAdmin, async (req, res) => {
 
         const result = await banner_model.findOneAndDelete({ _id: req.params.id })
 
+        if (!result) res.status(404)
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي البنر.' : 'The Banner was not found.'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -579,21 +599,20 @@ router.post('/notifications', verifyTokenAndAdmin, async (req, res) => {
                 })
 
             } else {
-                res.json({
+                res.status(404).json({
                     'status': false,
                     'data': language == 'ar' ? 'هذا المستخدم غير موجود' : 'The user not Exist'
                 })
             }
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -616,7 +635,7 @@ router.post('/conditions', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -634,21 +653,22 @@ router.put('/conditions', verifyTokenAndAdmin, async (req, res) => {
 
             const result = await condition_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
 
+            if (!result) res.status(404)
+
             res.json({
                 'status': result ? true : false,
                 'data': result ? result : language == 'ar' ? 'لم يتم العثور علي هذا الشرط' : 'Theis Condition was not found'
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -664,13 +684,15 @@ router.delete('/conditions/:id', verifyTokenAndAdmin, async (req, res) => {
 
         const result = await country_model.findOneAndDelete({ _id: req.params.id })
 
+        if (!result) res.status(404)
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي هذا الشرط' : 'Theis Condition was not found'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -695,8 +717,7 @@ router.post('/countries', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -714,21 +735,22 @@ router.put('/countries', verifyTokenAndAdmin, async (req, res) => {
 
             const result = await country_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
 
+            if (!result) res.status(404)
+
             res.json({
                 'status': result ? true : false,
                 'data': result ? result : language == 'ar' ? 'لم يتم العثور علي نوع الدولة' : 'The Country type was not found'
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -750,7 +772,7 @@ router.delete('/countries/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -776,7 +798,7 @@ router.get('/review-trips/:page', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -796,7 +818,7 @@ router.get('/approve-hajj-trip/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -815,7 +837,7 @@ router.get('/unApprove-hajj-trip/:id', verifyTokenAndAdmin, async (req, res) => 
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -839,8 +861,7 @@ router.get('/review-hajj-trips/:page', verifyTokenAndAdmin, async (req, res) => 
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -859,7 +880,7 @@ router.get('/approve-trip/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -878,7 +899,7 @@ router.get('/unApprove-trip/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -904,7 +925,7 @@ router.get('/complaints/:page', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -925,7 +946,7 @@ router.delete('/complaints/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -953,7 +974,7 @@ router.get('/users/:page', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -968,6 +989,7 @@ router.get('/block-user/:id', verifyTokenAndAdmin, async (req, res) => {
 
 
         const result = await user_model.findOneAndUpdate({ _id: req.params.id }, { blocked: true }, { returnOriginal: false })
+        if (!result) res.status(404)
 
         res.json({
             'status': result ? true : false,
@@ -976,7 +998,7 @@ router.get('/block-user/:id', verifyTokenAndAdmin, async (req, res) => {
 
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -994,6 +1016,8 @@ router.put('/users/:id', verifyTokenAndAdmin, async (req, res) => {
 
         const result = await user_model.findOneAndUpdate({ _id: req.params.id }, req.body, { returnOriginal: false })
 
+        if (!result) res.status(404)
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
@@ -1001,7 +1025,7 @@ router.put('/users/:id', verifyTokenAndAdmin, async (req, res) => {
 
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -1021,7 +1045,7 @@ router.delete('/users/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -1042,8 +1066,7 @@ router.get('/chat-contacts', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -1062,7 +1085,7 @@ router.get('/chats/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -1084,7 +1107,7 @@ router.post('/chats', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -1103,7 +1126,7 @@ router.delete('/end-chat/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

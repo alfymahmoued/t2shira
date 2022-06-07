@@ -15,7 +15,7 @@ router.get('/', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -37,7 +37,7 @@ router.post('/', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

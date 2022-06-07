@@ -17,7 +17,7 @@ router.get('/:id', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -31,14 +31,14 @@ router.get('/hajj/:id', async (req, res) => {
 
         if (!trip) res.status = 404
 
-        res.json({
+        res.status(500).json({
             'status': trip != null,
             'data': trip
         })
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -61,7 +61,7 @@ router.get('/umra/:id', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

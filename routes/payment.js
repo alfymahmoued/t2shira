@@ -105,7 +105,7 @@ router.post('/callback', async (req, res) => {
         }
         res.send()
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'stauts': false,
             'data': 'Erro',
         })
@@ -133,11 +133,11 @@ router.get('/callback', async (req, res) => {
         const isValid = realHmac == hmac
 
         res.redirect(serverURL + `paymentstatus?status=${isValid}`)
-        
+
     } catch (e) {
 
         console.log(e)
-        res.json({
+        res.status(500).json({
             'stauts': false,
             'data': 'Error',
         })

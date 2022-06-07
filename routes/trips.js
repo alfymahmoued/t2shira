@@ -57,7 +57,7 @@ router.get('/hajj/:page', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -109,7 +109,7 @@ router.get('/umra/:page', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -195,8 +195,7 @@ router.post('/search', async (req, res) => {
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -249,7 +248,7 @@ router.get('/byCompany/:id/:page', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -304,7 +303,7 @@ router.get('/byCountry/:id/:page', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -329,7 +328,7 @@ router.get('/companies/:page', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -365,16 +364,14 @@ router.post('/rating', verifyToken, async (req, res) => {
 
         } else {
 
-            res.json({
+            res.status(404).json({
                 'status': false,
                 'data': language == 'ar' ? 'هذه الرحلة غير موجودة' : 'This trip is not Exist'
             })
         }
 
     } catch (e) {
-
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -399,7 +396,7 @@ router.get('/comments/:id/:page', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -519,7 +516,7 @@ router.post('/book', verifyToken, async (req, res) => {
 
 
         } else {
-            res.json({
+            res.status(404).json({
                 'status': false,
                 'data': language == 'ar' ? 'هذه الرحلة غير متاحة' : 'This trips is not available'
             })
@@ -527,9 +524,7 @@ router.post('/book', verifyToken, async (req, res) => {
 
 
     } catch (e) {
-
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -609,7 +604,7 @@ router.get('/:page', async (req, res) => {
 
     } catch (e) {
 
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

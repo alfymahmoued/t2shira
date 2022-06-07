@@ -23,7 +23,7 @@ router.get('/searchTypes', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -80,14 +80,14 @@ router.post('/addSearchType', verifyToken, async (req, res) => {
             })
 
         } else {
-            res.json({
+            res.status(404).json({
                 'status': false,
                 'data': language == 'ar' ? 'خطة البحث غير متاحة الان' : 'The search plan is not available right now.'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -106,8 +106,7 @@ router.get('/countries', async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -126,7 +125,7 @@ router.get('/specialties', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -167,7 +166,7 @@ router.post('/search', verifyToken, async (req, res) => {
             }
 
         } else {
-            res.json({
+            res.status(404).json({
                 'status': false,
                 'data': language == 'ar' ? 'لا يوجد اشتراك لديك بحث او قد يكون منتهي' : 'You don\'t have a subscription to search or it may have expired'
             })
@@ -175,8 +174,7 @@ router.post('/search', verifyToken, async (req, res) => {
         }
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -269,6 +267,10 @@ router.post('/', verifyToken, async (req, res) => {
         },
         ]*/
 
+        const lastCV = await cv_model.findOne({}, {}, { sort: { 'number': -1 }, 'select': 'number' }).exec()
+
+        req.body.number = lastCV ? lastCV.number + 1 : 1
+
         const cvObject = new cv_model(req.body)
 
         const result = await cvObject.save()
@@ -296,11 +298,11 @@ router.post('/', verifyToken, async (req, res) => {
             jobs_field: user._doc.language == 'ar' ? 'وظائف' : 'Jobs',
             education_field: user._doc.language == 'ar' ? 'تعليم' : 'Education',
             skills_field: user._doc.language == 'ar' ? 'مهارات' : 'Skills',
+            cv_number_field: user._doc.language == 'ar' ? 'رقم الموظف' : 'Employee No.',
+            cv_number: user._doc.number,
         }
 
-        fs.writeFile('./public/files/cvs/' + pdfPath, template(data), function (err) {
-            if (err) throw err;
-        })
+        fs.writeFile('./public/files/cvs/' + pdfPath, template(data), function (err) { })
 
         res.json({
             'status': true,
@@ -310,8 +312,7 @@ router.post('/', verifyToken, async (req, res) => {
 
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -330,7 +331,7 @@ router.get('/', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -348,7 +349,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

@@ -12,7 +12,7 @@ router.post('/', verifyToken, upload.array('files'), (req, res) => {
             }
         )
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

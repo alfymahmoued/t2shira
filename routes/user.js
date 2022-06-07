@@ -25,7 +25,7 @@ router.get('/profile', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -48,7 +48,7 @@ router.get('/profile/:id', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -69,13 +69,15 @@ router.put('/profile', verifyToken, async (req, res) => {
         delete req.body.blocked
         const result = await user_model.findOneAndUpdate({ _id: req.user.id }, req.body, { returnOriginal: false })
 
+        if (!result) res.status(404)
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -102,7 +104,7 @@ router.get('/notifications/:page', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -121,14 +123,14 @@ router.delete('/notifications', verifyToken, async (req, res) => {
             })
         }
         else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -147,14 +149,14 @@ router.put('/notifications', verifyToken, async (req, res) => {
             })
         }
         else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -173,7 +175,7 @@ router.get('/conditions', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -191,7 +193,7 @@ router.get('/about-us', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -208,7 +210,7 @@ router.get('/common-questions', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -230,7 +232,6 @@ router.post('/complaint', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
         res.status(500).json({
             'status': false,
             'data': e
@@ -256,8 +257,7 @@ router.post('/chat', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -275,13 +275,15 @@ router.delete('/chat/:id', verifyToken, async (req, res) => {
 
         const result = await chat_model.findOneAndDelete({ _id: req.params.id, user_id: req.user.id })
 
+        if (!result) res.status(404)
+
         res.json({
             'status': result ? true : false,
             'data': result ? result : language == 'ar' ? 'لم يتم العثور علي الرسالة.' : 'The Message was not found.'
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -306,7 +308,7 @@ router.get('/chat/:page', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -371,8 +373,7 @@ router.get('/trips/:page', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })

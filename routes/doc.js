@@ -20,7 +20,7 @@ router.get('/types', async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -39,7 +39,7 @@ router.get('/', verifyToken, async (req, res) => {
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -108,8 +108,7 @@ router.post('/', verifyToken, async (req, res) => {
 
 
     } catch (e) {
-        console.log(e)
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -135,14 +134,14 @@ router.put('/', verifyToken, async (req, res) => {
             })
 
         } else {
-            res.json({
+            res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
@@ -158,13 +157,18 @@ router.delete('/:id', verifyToken, async (req, res) => {
 
         const result = await doc_model.findOneAndDelete({ _id: req.params.id, user_id: req.user.id })
 
+        if (!result) return res.status(404).json({
+            'status': false,
+            'data': result
+        })
+
         res.json({
-            'status': result ? true : false,
-            'data': result ? result : language == 'ar' ? 'لم يتم العثور علي طلب التوثيق.' : 'The documentation request was not found..'
+            'status': true,
+            'data': result
         })
 
     } catch (e) {
-        res.json({
+        res.status(500).json({
             'status': false,
             'data': e
         })
