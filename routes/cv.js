@@ -207,6 +207,61 @@ router.post('/', verifyToken, async (req, res) => {
 
         req.body.pdf_url = `${serverURL}files/cvs/${pdfPath}`
 
+        /*req.body.education = [
+            {
+                "level": 'Level',
+                "university": 'University',
+                "startDate": '12-12-11',
+                "endDate": '12-12-12',
+                "certification": 'The Certification',
+                "notes": 'The Notes',
+            }
+
+        ]
+
+        req.body.experiences = [
+            {
+                "skill": 'The Skill',
+                "notes": 'The Notes',
+                "certification": 'The Certification',
+            },
+            {
+                "skill": 'The Skill',
+                "notes": 'The Notes',
+                "certification": 'The Certification',
+            },
+            {
+                "skill": 'The Skill',
+                "notes": 'The Notes',
+                "certification": 'The Certification',
+            },
+
+        ]
+        req.body.jobs = [{
+            "startDate": '12-12-11',
+            "university": 'place',
+            "endDate": '12-12-12',
+            "certification": 'Egypt',
+            "city": 'Cairo',
+            "reason": 'The reason',
+        },
+        {
+            "startDate": '12-12-11',
+            "university": 'place',
+            "endDate": '12-12-12',
+            "certification": 'Egypt',
+            "city": 'Cairo',
+            "reason": 'The reason',
+        }, {
+            "startDate": '12-12-11',
+            "university": 'place',
+            "endDate": '12-12-12',
+            "certification": 'Egypt',
+            "city": 'Cairo',
+            "reason": 'The reason',
+        },
+        ]*/
+
         const cvObject = new cv_model(req.body)
 
         const result = await cvObject.save()
@@ -229,8 +284,9 @@ router.post('/', verifyToken, async (req, res) => {
             sex: result._doc.sex,
             id_number: result._doc.id_number,
             place_of_birth: result._doc.place_of_birth,
-            educations: result._doc.education,
+            education: result._doc.education,
             jobs: result._doc.jobs,
+            experiences: result._doc.experiences,
 
         }
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>{{name}}`s cv</title>
+    <title>Sherif Sobhy`s cv</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -161,15 +161,15 @@
 
     <div id="page">
         <div class="center">
-            <img src="{{logo_url}}" height="200" width="200">
+            <img src="http://t2shira.com//files/logo.png" height="200" width="200">
         </div>
         <div class="photo-and-name">
-            <img src="{{picture}}" class="photo" alt="Profile Picture">
+            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto&#x3D;compress&amp;cs&#x3D;tinysrgb&amp;dpr&#x3D;2&amp;h&#x3D;750&amp;w&#x3D;1260" class="photo" alt="Profile Picture">
             <div class="contact-info-box">
-                <h1 class="name">{{name}}</h1>
+                <h1 class="name">Sherif Sobhy</h1>
                 <br>
-                <h3 class="job-title">{{specialty_id}}</h3>
-                <p class="contact-details">address: {{current_place}} - &nbsp; city: {{city}}</p>
+                <h3 class="job-title">طبيب أسنان | Dentist</h3>
+                <p class="contact-details">address: cairo - &nbsp; city: cairo</p>
             </div>
         </div>
         <div id="bio-data">
@@ -177,78 +177,66 @@
             <table>
                 <tr>
                     <td>F'Name:</td>
-                    <td><b>{{name}}</b></td>
+                    <td><b>Sherif Sobhy</b></td>
                 </tr>
                 <tr>
                     <td>Date of Birth:</td>
-                    <td><b>{{date_of_birth}}</b></td>
+                    <td><b>12-12-12</b></td>
                 </tr>
                 <tr>
                     <td>ID Number:</td>
-                    <td><b>{{id_number}}</b></td>
+                    <td><b>123456</b></td>
                 </tr>
                 <tr>
                     <td>sex:</td>
-                    <td><b>{{sex}}</b></td>
+                    <td><b>ذكر</b></td>
                 </tr>
                 <tr>
                     <td>zip code:</td>
-                    <td><b>{{zip_code}}</b></td>
+                    <td><b>123456</b></td>
                 </tr>
                 <tr>
                     <td>Place of birth:</td>
-                    <td><b>{{place_of_birth}}</b></td>
+                    <td><b>cairo</b></td>
                 </tr>
                 <tr>
                     <td>social status:</td>
-                    <td><b>{{social_status}}</b></td>
+                    <td><b>social status</b></td>
                 </tr>
-            </table>
-        </div>
-        <div id="work">
-            <h3>Jobs</h3>
-            <table>
-                {{#each jobs}}
-
-                <tr class="work-1">
-                    <td>{{this.startDate}} - {{this.endDate}}</td>
-                    <td>
-                        <b>{{this.university}}</b>: {{this.certification}} | {{this.city}} | {{this.reason}}
-                    </td>
-                </tr>
-                {{/each}}
-
             </table>
         </div>
 
         <div id="work">
-            <h3>Education</h3>
+            <h3>Experience</h3>
             <table>
-                {{#each education}}
 
                 <tr class="work-1">
-                    <td>{{this.startDate}} - {{this.endDate}}</td>
+                    <td>12-12-11 - 12-12-11</td>
                     <td>
-                        <b>{{this.level}}</b>: {{this.university}} | {{this.certification}} | {{this.notes}}
+                        <b>The Title</b>: The place | The city
                     </td>
                 </tr>
-                {{/each}}
-
-            </table>
-        </div>
-
-        <div id="work">
-            <h3>Skills</h3>
-            <table>
-                {{#each experiences}}
 
                 <tr class="work-1">
-                    <td>{{this.skill}} - {{this.certification}}</td>
+                    <td>12-12-11 - 12-12-11</td>
                     <td>
-                        <b>{{this.notes}}</b>
+                        <b>The Title</b>: The place | The city
                     </td>
                 </tr>
-                {{/each}}
+
+                <tr class="work-1">
+                    <td>12-12-11 - 12-12-11</td>
+                    <td>
+                        <b>The Title</b>: The place | The city
+                    </td>
+                </tr>
+
+                <tr class="work-1">
+                    <td>12-12-11 - 12-12-11</td>
+                    <td>
+                        <b>The Title</b>: The place | The city
+                    </td>
+                </tr>
 
             </table>
         </div>
