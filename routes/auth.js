@@ -8,7 +8,7 @@ router.post('/register', async (req, res) => {
     try {
         const { language } = req.headers
 
-        const { idToken, email, notification, fcmToken } = req.body
+        const { idToken, email, notification, fcmToken, phone_number } = req.body
 
         if (idToken && email) {
 
@@ -25,6 +25,7 @@ router.post('/register', async (req, res) => {
                     notification: notification ?? false,
                     uid: firebaseUser.uid,
                     fcmToken: fcmToken ?? '',
+                    phone_number,
                 })
 
                 const result = await userObject.save()

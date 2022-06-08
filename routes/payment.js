@@ -20,7 +20,25 @@ router.post('/callback', async (req, res) => {
 
         if (success == true && (await getHMACByOrderId(paymentToken, id)) == hmac) {
 
-            const { city, apartment, building, floor, last_name, email, first_name } = payment_key_claims.billing_data
+            const data = JSON.parse(payment_key_claims.billing_data.extra_description)
+
+            if (data.method_type == 'document') {
+
+                const object = new doc_model({
+                    user_id: data.user_id,
+                    country: data.country,
+                    name: data.name,
+                    phone: data.phone,
+                    email: data.email,
+                    address: data.address,
+                    doc_type: data.doc_type,
+                    cultural_supplement: data.cultural_supplement == 1,
+                    embassy: data.embassy == 1,
+                    egyptian_foreign_ministry: data.egyptian_foreign_ministry == 1,
+                })
+                await object.save()
+            }
+            /*const { city, apartment, building, floor, last_name, email, first_name } = payment_key_claims.billing_data
 
 
             if (city && apartment && building) {
@@ -101,10 +119,11 @@ router.post('/callback', async (req, res) => {
                         }
                     }
                 }
-            }
+            }*/
         }
         res.send()
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             'stauts': false,
             'data': 'Erro',
@@ -120,22 +139,20 @@ router.get('/callback', async (req, res) => {
         const { hmac, id } = req.query
 
         if (!hmac || !id || req.query.success == 'false') {
-            return res.json({
-                'stauts': false,
-                'data': req.query['data.message'],
-            })
+            return res.redirect(serverURL + `paymentstatus?status=false`)
         }
 
         const paymentToken = await getPaymobToken()
 
         const realHmac = await getHMACByOrderId(paymentToken, id)
 
-        const isValid = realHmac == hmac
+        console.log(hmac)
+        console.log(realHmac)
 
+        const isValid = realHmac == hmac
         res.redirect(serverURL + `paymentstatus?status=${isValid}`)
 
     } catch (e) {
-
         console.log(e)
         res.status(500).json({
             'stauts': false,

@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-const apiKey = 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2TVRZNU9UWTNMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuNGdVMmFlbnRvVXlTemt0UjRrV3htTkJuWEhCU3J2cXVkVVVyTFR1R3NDYmtkMlNENW9JYzlxMUhSdzF6RFJqMkYzUGxLdVpYY0kxWTVuYVJYLWd3NVE='
-const integrationId = '2161164'
+const apiKey = 'ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SndjbTltYVd4bFgzQnJJam94TmprNU5qY3NJbU5zWVhOeklqb2lUV1Z5WTJoaGJuUWlMQ0p1WVcxbElqb2lNVFkxTkRjd01qUTBOQzR4TURFeE1ESWlmUS5GZUJ6aGdPb01KUlVtemswR2xOaTIwQ1FJWW8zc1FzUWo0ZXk0WTVsTEhGejBON3pVcmF4ZUZNVUxNUnNTeUYwU2F5OVFmVnBScXJnSy1mQ0pqNWtqUQ=='
+const integrationId = '2203018'
 
 async function getPaymobToken() {
 
@@ -37,14 +37,6 @@ async function paymentKeys(token, orderId, amount, billingData) {
             "integration_id": integrationId,
             "lock_order_when_paid": "false",
             "billing_data": billingData,
-            "items": [
-                {
-                    "name": "ASC1515",
-                    "amount_cents": "500000",
-                    "description": "Smart Watch",
-                    "quantity": "1"
-                }
-            ]
         })
     return result.data.token
 }

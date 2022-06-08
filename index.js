@@ -47,6 +47,7 @@ app.use(function (req, res, next) {
 
 app.use('/api/', (req, res, next) => {
 
+    console.log(req.path)
     if (process.env.API_KEY == req.headers.apikey || req.path == '/payment/callback') next()
     else
         res.sendStatus(400)
