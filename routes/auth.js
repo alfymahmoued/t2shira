@@ -8,6 +8,7 @@ router.post('/register', async (req, res) => {
     try {
         const { language } = req.headers
 
+        console.log(req.body)
         const { idToken, email, notification, fcmToken, phone_number } = req.body
 
         if (idToken && email) {
