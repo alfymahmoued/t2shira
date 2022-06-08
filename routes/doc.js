@@ -90,7 +90,7 @@ router.post('/', verifyToken, async (req, res) => {
         }
 
 
-        if (!user._doc.phone_number) user._doc.phone_number = '+201113432358'
+        if (!user._doc.phone_number) user._doc.phone_number = 'NA'
         if (!user._doc.first_name) user._doc.first_name = 'NA'
         if (!user._doc.last_name) user._doc.last_name = 'NA'
         if (!user._doc.email) user._doc.email = 'NA'

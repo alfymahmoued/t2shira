@@ -58,6 +58,7 @@ router.post('/register', async (req, res) => {
             })
         }
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             'status': false,
             'data': e
@@ -111,13 +112,13 @@ router.post('/login', async (req, res) => {
             }
 
         } else {
-
             res.status(500).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             'status': false,
             'data': e
@@ -198,6 +199,7 @@ router.post('/social', async (req, res) => {
             })
         }
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             'status': false,
             'data': e
