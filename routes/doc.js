@@ -128,22 +128,6 @@ router.post('/', verifyToken, async (req, res) => {
         }
         )
 
-        /*{
-
-            'city': req.user.id,
-            'first_name': req.body.doc_type,
-            'last_name': req.body.country,
-            'email': req.body.cultural_supplement + '_',
-            'building': req.body.embassy + '_',
-            'floor': req.body.egyptian_foreign_ministry + '_',
-            'apartment': 'document',
-            'street': "_",
-            'phone_number': "_",
-            'shipping_method': "_",
-            'postal_code': "_",
-            'country': "_",
-            'state': "_",
-        }*/
         res.json({
             'status': true,
             'data': `https://accept.paymob.com/api/acceptance/iframes/373719?payment_token=${iFrameToken}`

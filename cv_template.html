@@ -211,7 +211,8 @@
                 <tr class="work-1">
                     <td>{{this.startDate}} - {{this.endDate}}</td>
                     <td>
-                        <b>{{this.university}}</b>: {{this.certification}} | {{this.city}} | {{this.reason}}
+                        <b>{{this.university}}</b>: {{this.city}} | {{this.reason}}
+                        <img src="{{this.certification}}" height="100" width="100">
                     </td>
                 </tr>
                 {{/each}}
@@ -227,7 +228,8 @@
                 <tr class="work-1">
                     <td>{{this.startDate}} - {{this.endDate}}</td>
                     <td>
-                        <b>{{this.level}}</b>: {{this.university}} | {{this.certification}} | {{this.notes}}
+                        <b>{{this.level}}</b>: {{this.university}} | {{this.notes}}
+                        <img src="{{this.certification}}" height="100" width="100">
                     </td>
                 </tr>
                 {{/each}}
@@ -241,7 +243,8 @@
                 {{#each experiences}}
 
                 <tr class="work-1">
-                    <td>{{this.skill}} - {{this.certification}}</td>
+                    <td>{{this.skill}}</td>
+                    <img src="{{this.certification}}" height="100" width="100">
                     <td>
                         <b>{{this.notes}}</b>
                     </td>

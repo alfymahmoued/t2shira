@@ -408,8 +408,9 @@ router.post('/book', verifyToken, async (req, res) => {
 
     try {
         const { language } = req.headers
+        const { trip_id, start_booking_date, start_trip_date, number_of_persons, notes } = req.body
 
-        if (!req.body.trip_id) return res.status(404).json({
+        if (!trip_id || !start_booking_date || !start_trip_date || !number_of_persons) return res.status(500).json({
             'status': false,
             'data': 'Bad Request'
         })
@@ -433,106 +434,44 @@ router.post('/book', verifyToken, async (req, res) => {
         req.body.company_id = trip._doc.company_id
         req.body.status = false
 
-        if (!user._doc.phone_number) user._doc.phone_number = '.'
-        if (!user._doc.first_name) user._doc.first_name = '.'
-        if (!user._doc.last_name) user._doc.last_name = '.'
-        if (!user._doc.email) user._doc.email = '.'
+        if (!user._doc.phone_number) user._doc.phone_number = 'NA'
+        if (!user._doc.first_name) user._doc.first_name = 'NA'
+        if (!user._doc.last_name) user._doc.last_name = 'NA'
+        if (!user._doc.email) user._doc.email = 'NA'
 
         const paymentToken = await getPaymobToken()
         const orderId = await makeOrder(paymentToken, req.body.total_paid * 100)
-        const iFrameToken = await paymentKeys(paymentToken, orderId, req.body.total_paid * 100, {
-            'phone_number': user._doc.phone_number,
-            'first_name': user._doc.first_name,
-            'last_name': user._doc.last_name,
-            'email': user._doc.email,
-            'floor': '.',
-            'city': '.',
-            'building': '.',
-            'apartment': '.',
-            'street': ".",
-            'postal_code': ".",
-            'country': ".",
-            'state': ".",
-            'shipping_method': JSON.stringify({
-                'method_type': 'booking_trip',
-                'user_id': req.user.id,
-                'data': req.body,
-            }),
-        }
+        const iFrameToken = await paymentKeys(paymentToken, orderId, req.body.total_paid * 100,
+            {
+                'phone_number': user._doc.phone_number,
+                'first_name': user._doc.first_name,
+                'last_name': user._doc.last_name,
+                'email': user._doc.email,
+                'floor': 'NA',
+                'city': 'NA',
+                'building': 'NA',
+                'apartment': 'NA',
+                'street': "NA",
+                'postal_code': "NA",
+                'country': "NA",
+                'state': "NA",
+                'shipping_method': 'NA',
+                'extra_description': JSON.stringify({
+                    'method_type': 'booking_trip',
+                    'user_id': req.user.id,
+                    'trip_id': trip_id,
+                    'start_booking_date': start_booking_date,
+                    'start_trip_date': start_trip_date,
+                    'number_of_persons': number_of_persons,
+                    'notes': notes ?? '',
+                })
+            }
         )
 
         res.json({
             'status': true,
             'data': `https://accept.paymob.com/api/acceptance/iframes/373719?payment_token=${iFrameToken}`
         })
-
-
-        /* const lastBook = await trip_booking.findOne({}, {}, { sort: { 'booking_number': -1 }, 'select': 'booking_number' }).exec()
- 
-         req.body.trip_number = lastBook ? lastBook.booking_number + 1 : 1000000
- 
-         req.body.user_id = req.user.id
-         req.body.company_id = trip._doc.company_id
-         req.body.status = false
- 
- 
- 
-         const object = new trip_booking(req.body)
-         const book = await object.save()
- 
-         if (book) {
- 
-             const user = await user_model.findById(req.user.id).select('fcmToken language name')
- 
-             if (user && user._doc.notification && user._doc.fcmToken) {
-                 sendNotification(
-                     user._doc.fcmToken,
-                     user._doc.language == 'ar' ? 'تم حجز الرحلة' : 'The Trip has been booked',
-                     user._doc.language == 'ar' ? `تم حجز الرحلة رقم ${req.body.trip_booking} بنجاح بانتظار موافقة شركة السياحة` : `The Trip Number ${req.body.trip_booking} has been successfully booked, pending approval by the tourism company`,
-                 )
-             }
- 
-             const company = await company_model.findById(trip._doc.company_id).select('fcmToken language')
- 
-             if (company && company._doc.fcmToken) {
-                 const companyMessageAR = `
-                 تم حجز رحلة ${trip._id} \n
-                 رقم الحجز ${req.body.trip_number} \n
-                 اجمالي المدفوع ${req.body.total_paid} \n
-                 عدد الافراد ${req.body.number_of_persons} \n
-                 من المستخدم ${user._doc.first_name} ${user._doc.last_name} \n`
- 
-                 const companyMessageEN = `Trip booked ${trip._id} \n
-                 Booking number ${req.body.trip_number} \n
-                 Total paid ${req.body.total_paid} \n
-                 Number of individuals ${req.body.number_of_persons} \n
-                 From user ${user._doc.first_name} ${user._doc.last_name} \n`
- 
-                 sendNotification(
-                     company._doc.fcmToken,
-                     company._doc.language == 'ar' ? 'تم حجز رحلة' : 'Trip has been booked',
-                     company._doc.language == 'ar' ? companyMessageAR : companyMessageEN,
-                 )
- 
-                 const notifcationObject = new notification_model({
-                     user_id: company.id,
-                     title_ar: 'تم حجز رحلة',
-                     title_en: 'Trip has been booked',
-                     body_ar: companyMessageAR,
-                     body_en: companyMessageEN,
-                 }
-                 )
-                 await notifcationObject.save()
-             }
-         }
- 
-         res.json({
-             'status': true,
-             'data': book
-         })*/
-
-
-
 
     } catch (e) {
         res.status(500).json({

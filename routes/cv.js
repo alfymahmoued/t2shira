@@ -36,55 +36,62 @@ router.post('/addSearchType', verifyToken, async (req, res) => {
 
         const { language } = req.headers
 
-        if (!req.body.type_id) return res.json({
+        const { type_id } = req.body
+        if (!type_id) return res.json({
             'status': false,
             'data': 'Bad Request'
         })
 
+        const user = await user_model.findById(req.user.id)
+
+        if (!user) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'لم يتم العثور علي المستخدم.' : 'User not Exist.'
+        })
+
         const type = await cv_search_types_model.findById(req.body.type_id)
 
-        if (type) {
+        if (!type) return res.status(404).json({
+            'status': false,
+            'data': language == 'ar' ? 'خطة البحث غير متاحة الان' : 'The search plan is not available right now.'
+        })
 
-            const existUser = await user_model.findById(req.user.id)
+        if (!user._doc.phone_number) user._doc.phone_number = 'NA'
+        if (!user._doc.first_name) user._doc.first_name = 'NA'
+        if (!user._doc.last_name) user._doc.last_name = 'NA'
+        if (!user._doc.email) user._doc.email = 'NA'
 
-            if (!existUser) {
-                return res.json({
-                    'status': false,
-                    'data': language == 'ar' ? 'هذا الحساب غير موجود لدينا' : 'This account we don\'t have.'
+        const paymentToken = await getPaymobToken()
+        const orderId = await makeOrder(paymentToken, type._doc.cost * 100)
+        const iFrameToken = await paymentKeys(paymentToken, orderId, type._doc.cost * 100,
+            {
+                'phone_number': user._doc.phone_number,
+                'first_name': user._doc.first_name,
+                'last_name': user._doc.last_name,
+                'email': user._doc.email,
+                'floor': 'NA',
+                'city': 'NA',
+                'building': 'NA',
+                'apartment': 'NA',
+                'street': "NA",
+                'postal_code': "NA",
+                'country': "NA",
+                'state': "NA",
+                'shipping_method': 'NA',
+                'extra_description': JSON.stringify({
+                    'method_type': 'cv_search_plan',
+                    'user_id': req.user.id,
+                    'type_id': type._id,
                 })
             }
+        )
 
-            const paymentToken = await getPaymobToken()
-            const orderId = await makeOrder(paymentToken, type._doc.cost * 100)
-            const iFrameToken = await paymentKeys(paymentToken, orderId, type._doc.cost * 100, {
+        res.json({
+            'status': true,
+            'data': `https://accept.paymob.com/api/acceptance/iframes/373719?payment_token=${iFrameToken}`
+        })
 
-                'city': existUser.id,
-                'first_name': existUser._doc.first_name,
-                'last_name': existUser._doc.last_name,
-                'email': existUser._doc.email,
-                'apartment': 'cv_search_plan',
-                'building': req.body.type_id,
-                'floor': type._doc.duration,
-                'street': "_",
-                'phone_number': "_",
-                'shipping_method': "_",
-                'postal_code': "_",
-                'country': "_",
-                'state': "_",
-            }
-            )
 
-            res.json({
-                'status': true,
-                'data': `https://accept.paymob.com/api/acceptance/iframes/373719?payment_token=${iFrameToken}`
-            })
-
-        } else {
-            res.status(404).json({
-                'status': false,
-                'data': language == 'ar' ? 'خطة البحث غير متاحة الان' : 'The search plan is not available right now.'
-            })
-        }
 
     } catch (e) {
         res.status(500).json({
