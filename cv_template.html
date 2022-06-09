@@ -197,12 +197,17 @@
                     <td><b>{{place_of_birth}}</b></td>
                 </tr>
                 <tr>
+                    <td>{{current_place_field}}:</td>
+                    <td><b>{{current_place}}</b></td>
+                </tr>
+                <tr>
                     <td>{{social_status_field}}:</td>
                     <td><b>{{social_status}}</b></td>
                 </tr>
 
             </table>
         </div>
+
         <div id="work">
             <h3>{{jobs_field}}</h3>
             <table>
@@ -212,8 +217,8 @@
                     <td>{{this.startDate}} - {{this.endDate}}</td>
                     <td>
                         <b>{{this.university}}</b>: {{this.city}} | {{this.reason}}
-                        <img src="{{this.certification}}" height="100" width="100">
                     </td>
+                    <img src="{{this.certification}}" height="100" width="100">
                 </tr>
                 {{/each}}
 
@@ -229,8 +234,8 @@
                     <td>{{this.startDate}} - {{this.endDate}}</td>
                     <td>
                         <b>{{this.level}}</b>: {{this.university}} | {{this.notes}}
-                        <img src="{{this.certification}}" height="100" width="100">
                     </td>
+                    <img src="{{this.certification}}" height="100" width="100">
                 </tr>
                 {{/each}}
 
@@ -244,10 +249,10 @@
 
                 <tr class="work-1">
                     <td>{{this.skill}}</td>
-                    <img src="{{this.certification}}" height="100" width="100">
                     <td>
                         <b>{{this.notes}}</b>
                     </td>
+                    <img src="{{this.certification}}" height="100" width="100">
                 </tr>
                 {{/each}}
 

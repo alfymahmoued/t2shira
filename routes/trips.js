@@ -463,6 +463,7 @@ router.post('/book', verifyToken, async (req, res) => {
                     'start_booking_date': start_booking_date,
                     'start_trip_date': start_trip_date,
                     'number_of_persons': number_of_persons,
+                    'total_paid': req.body.total_paid,
                     'notes': notes ?? '',
                 })
             }

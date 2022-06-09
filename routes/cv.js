@@ -225,61 +225,6 @@ router.post('/', verifyToken, async (req, res) => {
 
         req.body.pdf_url = `${serverURL}files/cvs/${pdfPath}`
 
-        /*req.body.education = [
-            {
-                "level": 'Level',
-                "university": 'University',
-                "startDate": '12-12-11',
-                "endDate": '12-12-12',
-                "certification": 'The Certification',
-                "notes": 'The Notes',
-            }
-
-        ]
-
-        req.body.experiences = [
-            {
-                "skill": 'The Skill',
-                "notes": 'The Notes',
-                "certification": 'The Certification',
-            },
-            {
-                "skill": 'The Skill',
-                "notes": 'The Notes',
-                "certification": 'The Certification',
-            },
-            {
-                "skill": 'The Skill',
-                "notes": 'The Notes',
-                "certification": 'The Certification',
-            },
-
-        ]
-        req.body.jobs = [{
-            "startDate": '12-12-11',
-            "university": 'place',
-            "endDate": '12-12-12',
-            "certification": 'Egypt',
-            "city": 'Cairo',
-            "reason": 'The reason',
-        },
-        {
-            "startDate": '12-12-11',
-            "university": 'place',
-            "endDate": '12-12-12',
-            "certification": 'Egypt',
-            "city": 'Cairo',
-            "reason": 'The reason',
-        }, {
-            "startDate": '12-12-11',
-            "university": 'place',
-            "endDate": '12-12-12',
-            "certification": 'Egypt',
-            "city": 'Cairo',
-            "reason": 'The reason',
-        },
-        ]*/
-
         const lastCV = await cv_model.findOne({}, {}, { sort: { 'number': -1 }, 'select': 'number' }).exec()
 
         req.body.number = lastCV ? lastCV.number + 1 : 1
@@ -301,12 +246,14 @@ router.post('/', verifyToken, async (req, res) => {
             place_of_birth: result._doc.place_of_birth,
             education: result._doc.education,
             jobs: result._doc.jobs,
+            current_place: result._doc.current_place,
             experiences: result._doc.experiences,
             bio_field: user._doc.language == 'ar' ? 'المعلومات الحيوية' : 'Bio-Data',
             name_field: user._doc.language == 'ar' ? 'الاسم' : 'Name',
             date_of_birth_field: user._doc.language == 'ar' ? 'تاريخ الميلاد' : 'Date of Birth',
             sex_field: user._doc.language == 'ar' ? 'الجنس' : 'Sex',
             place_of_birth_field: user._doc.language == 'ar' ? 'مكان الميلاد' : 'Place Of Birth',
+            current_place_field: user._doc.language == 'ar' ? 'مكان الاقامة الحالي' : 'Current Place Of Residence',
             social_status_field: user._doc.language == 'ar' ? 'الحالة الاجتماعية' : 'Social Status',
             jobs_field: user._doc.language == 'ar' ? 'وظائف' : 'Jobs',
             education_field: user._doc.language == 'ar' ? 'تعليم' : 'Education',
