@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkt2shira=self.webpackChunkt2shira||[]).push([[149],{3149:function(n,t,e){e.r(t);var u=e(2791),r=e(184),s=(0,u.lazy)((function(){return e.e(537).then(e.bind(e,2537))}));t.default=function(){return(0,r.jsx)(s,{})}}}]);
+//# sourceMappingURL=149.d0a8473c.chunk.js.map

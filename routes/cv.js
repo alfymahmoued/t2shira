@@ -153,7 +153,7 @@ router.post('/search', verifyToken, async (req, res) => {
 
 
             if (!country_id && !specialty_id)
-                res.json({
+                res.status(500).json({
                     'status': false,
                     'data': language == 'ar' ? 'يجب البحث بالدولة او التخصص أو كلاهما.' : 'You must search by country, specialization, or both.'
                 })
@@ -165,6 +165,7 @@ router.post('/search', verifyToken, async (req, res) => {
                         $or: [{ country_id }, { specialty_id }]
                     }).limit(20)
 
+                if (result.length == 0) res.status(500)
                 res.json({
                     'status': result.length > 0 ? true : false,
                     'data': result.length > 0 ? result : language == 'ar' ? 'لم يتم العثور علي متطلباتك.' : 'Your requirements were not found.'
