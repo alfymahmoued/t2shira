@@ -169,6 +169,26 @@ router.get('/cv/:page', verifyTokenAndAdmin, async (req, res) => {
         })
     }
 })
+router.get('/cvs-count', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const { language } = req.headers
+
+        const result = await cv_model.findOne({}).count()
+
+        res.json({
+            'status': true,
+            'data': result
+        })
+
+    } catch (e) {
+        res.status(500).json({
+            'status': false,
+            'data': e
+        })
+    }
+})
 router.get('/cv-by-number/:number', verifyTokenAndAdmin, async (req, res) => {
 
     try {
@@ -1017,6 +1037,7 @@ router.post('/search-users/', verifyTokenAndAdmin, async (req, res) => {
         })
     }
 })
+
 router.get('/users/:page', verifyTokenAndAdmin, async (req, res) => {
 
     try {
