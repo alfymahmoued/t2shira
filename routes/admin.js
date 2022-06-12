@@ -5,7 +5,7 @@ const vis_model = require('../models/visa_model')
 const doc_type_model = require('../models/doc_type_model')
 const doc_model = require('../models/doc_model')
 const cv_search_types_model = require('../models/cv_search_types_model')
-const { verifyTokenAndAdmin, createToken, sendNotification } = require('../helper')
+const { verifyTokenAndAdmin, createToken, sendNotification, sendNotificationToAll } = require('../helper')
 const banner_model = require('../models/banner_model')
 const notification_model = require('../models/notification_model')
 const user_model = require('../models/user_model')
@@ -673,6 +673,37 @@ router.post('/notifications', verifyTokenAndAdmin, async (req, res) => {
     }
 })
 
+router.post('/notifications-all', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+
+        if (req.body.title_ar && req.body.title_en && req.body.body_ar && req.body.body_en) {
+
+            sendNotificationToAll(
+                user._doc.language == 'ar' ? req.body.title_ar : req.body.title_en,
+                user._doc.language == 'ar' ? req.body.body_ar : req.body.body_en,
+            )
+
+            res.json({
+                'status': true,
+                'data': 'Success'
+            })
+
+        } else {
+            res.status(500).json({
+                'status': false,
+                'data': 'Bad Request'
+            })
+        }
+
+    } catch (e) {
+        res.status(500).json({
+            'status': false,
+            'data': e
+        })
+    }
+})
 ///////////////// CONDITOONS /////////////////////
 
 router.post('/conditions', verifyTokenAndAdmin, async (req, res) => {
