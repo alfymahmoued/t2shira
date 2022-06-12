@@ -147,11 +147,15 @@ router.get('/searchTypesUsers/:page', verifyTokenAndAdmin, async (req, res) => {
         })
     }
 })
-router.get('/cv', verifyTokenAndAdmin, async (req, res) => {
+router.get('/cv/:page', verifyTokenAndAdmin, async (req, res) => {
 
     try {
+        var pageInNumber = Number(req.params.page)
 
-        const result = await cv_model.find({})
+        if (!pageInNumber && pageInNumber < 1) pageInNumber = 1
+        pageInNumber--
+
+        const result = await cv_model.find({}).sort({ createdAt: -1 }).skip(pageInNumber * 20)
 
         res.json({
             'status': true,
@@ -177,7 +181,7 @@ router.get('/cv-by-number/:number', verifyTokenAndAdmin, async (req, res) => {
             'status': false,
             'data': language == 'ar' ? 'السيرة الذاتية غير موجودة' : 'CV is Not Exist'
         })
-        
+
         res.json({
             'status': true,
             'data': result
@@ -190,11 +194,17 @@ router.get('/cv-by-number/:number', verifyTokenAndAdmin, async (req, res) => {
         })
     }
 })
+
 router.put('/cv', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
         const { language } = req.headers
+
+        if (!req.body.id) return res.status(500).json({
+            'status': false,
+            'data': 'Bad Request'
+        })
 
         const result = await cv_model.findOneAndUpdate({ _id: req.body.id }, req.body, { returnOriginal: false })
         if (!result) res.status(404)
@@ -979,7 +989,34 @@ router.delete('/complaints/:id', verifyTokenAndAdmin, async (req, res) => {
 
 //////////////// USERS ////////////////
 
+router.post('/search-users/', verifyTokenAndAdmin, async (req, res) => {
 
+    try {
+
+        const { email, phone_number, first_name, last_name } = req.body
+
+        const result = await user_model.find({
+            $or: [
+                { email: { $regex: '.*' + email + '.*', $options: 'i' } },
+                { phone_number: { $regex: '.*' + phone_number + '.*', $options: 'i' } },
+                { first_name: { $regex: '.*' + first_name + '.*', $options: 'i' } },
+                { last_name: { $regex: '.*' + last_name + '.*', $options: 'i' } },
+            ]
+        }).limit(50)
+
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        res.status(500).json({
+            'status': false,
+            'data': e
+        })
+    }
+})
 router.get('/users/:page', verifyTokenAndAdmin, async (req, res) => {
 
     try {
