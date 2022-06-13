@@ -678,11 +678,11 @@ router.post('/notifications-all', verifyTokenAndAdmin, async (req, res) => {
     try {
 
 
-        if (req.body.title_ar && req.body.title_en && req.body.body_ar && req.body.body_en) {
+        if (req.body.title && req.body.body) {
 
             sendNotificationToAll(
-                user._doc.language == 'ar' ? req.body.title_ar : req.body.title_en,
-                user._doc.language == 'ar' ? req.body.body_ar : req.body.body_en,
+                req.body.title,
+                req.body.body,
             )
 
             res.json({
