@@ -677,12 +677,12 @@ router.post('/notifications-all', verifyTokenAndAdmin, async (req, res) => {
 
     try {
 
-
-        if (req.body.title && req.body.body) {
+        const { title, body } = req.body
+        if (title && body) {
 
             sendNotificationToAll(
-                req.body.title,
-                req.body.body,
+                title,
+                body,
             )
 
             res.json({
