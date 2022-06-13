@@ -676,13 +676,14 @@ router.post('/notifications', verifyTokenAndAdmin, async (req, res) => {
 router.post('/notifications-all', verifyTokenAndAdmin, async (req, res) => {
 
     try {
+        console.log(req.body)
+        const { title, text } = req.body
 
-        const { title, body } = req.body
-        if (title && body) {
+        if (title && text) {
 
             sendNotificationToAll(
                 title,
-                body,
+                text,
             )
 
             res.json({
@@ -691,13 +692,14 @@ router.post('/notifications-all', verifyTokenAndAdmin, async (req, res) => {
             })
 
         } else {
-            res.status(500).json({
+            res.status(400).json({
                 'status': false,
                 'data': 'Bad Request'
             })
         }
 
     } catch (e) {
+        console.log(e)
         res.status(500).json({
             'status': false,
             'data': e
