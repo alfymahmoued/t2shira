@@ -676,7 +676,6 @@ router.post('/notifications', verifyTokenAndAdmin, async (req, res) => {
 router.post('/notifications-all', verifyTokenAndAdmin, async (req, res) => {
 
     try {
-        console.log(req.body)
         const { title, text } = req.body
 
         if (title && text) {
