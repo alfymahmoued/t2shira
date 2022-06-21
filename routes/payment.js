@@ -110,6 +110,7 @@ router.post('/callback', async (req, res) => {
                 }
             }
         }
+        
         res.send()
     } catch (e) {
         console.log(e)

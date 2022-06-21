@@ -16,6 +16,7 @@ const trip_model = require('../models/trip_model')
 const condition_model = require('../models/condition_model')
 const complaint_model = require('../models/complaint_model')
 const chat_model = require('../models/chat_model')
+const trip_booking = require('../models/trip_booking')
 
 router.post('/login', (req, res) => {
 
@@ -1240,6 +1241,40 @@ router.delete('/end-chat/:id', verifyTokenAndAdmin, async (req, res) => {
         })
 
     } catch (e) {
+        res.status(500).json({
+            'status': false,
+            'data': e
+        })
+    }
+})
+
+
+router.get('/statistics', verifyTokenAndAdmin, async (req, res) => {
+
+    try {
+
+        const allCvs = await cv_model.find({}).select('_id specialty_id')
+        const result = {
+            total_user: await user_model.find({}).count(),
+            total_cvs: allCvs.length,
+            cvs: [],
+            docs: await doc_type_model.find({}).count(),
+            booking_trip: await trip_booking.find({}).count(),
+        }
+
+        for (var i = 0; i < allCvs.length; i++) {
+            if (!result.cvs.find(x => x.id == allCvs[i]._doc.specialty_id)) result.cvs.push({ 'id': allCvs[i]._doc.specialty_id, 'count': 0 })
+            result.cvs.find(x => x.id == allCvs[i]._doc.specialty_id).count += 1
+        }
+
+
+        res.json({
+            'status': true,
+            'data': result,
+        })
+
+    } catch (e) {
+        console.log(e)
         res.status(500).json({
             'status': false,
             'data': e
